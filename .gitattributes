@@ -1,0 +1,14 @@
+* text=auto !eol
+src/com/ceridwen/util/PersistentQueue.java -text
+src/com/ceridwen/util/Queue.java -text
+src/com/ceridwen/util/Spooler.java -text
+src/com/ceridwen/util/Spooler.num -text
+src/com/ceridwen/util/SpoolerProcessor.java -text
+src/com/ceridwen/util/TransientQueue.java -text
+src/com/ceridwen/util/encryption/TEAAlgorithm.java -text
+src/com/ceridwen/util/logging/SMTPLogHandler.java -text
+src/com/ceridwen/util/logging/SMTPLogHandler.num -text
+src/com/ceridwen/util/versioning/AboutDialog.java -text
+src/com/ceridwen/util/versioning/AboutDialog.num -text
+src/com/ceridwen/util/versioning/ComponentRegistry.java -text
+src/com/ceridwen/util/versioning/ComponentRegistry.num -text
