@@ -1,8 +1,8 @@
 #Contents updated by BuildNumberOT
-#Thu Oct 14 23:26:35 BST 2004
-version=1.0.62
+#Mon Oct 25 23:52:02 BST 2004
+version=1.0.65
+date=Mon Oct 25 23\:52\:02 BST 2004
 name=Ceridwen Utils\: Component Registry
-date=Thu Oct 14 23\:26\:35 BST 2004
 author=Matthew J. Dovey
-epoch=1097792795391
-build=62
+epoch=1098744722371
+build=65
