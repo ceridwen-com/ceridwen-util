@@ -1,5 +1,6 @@
 * text=auto !eol
 /Utilities.jpx -text
+/ceridwen-utilities.jar -text
 src/com/ceridwen/util/PersistentQueue.java -text
 src/com/ceridwen/util/Queue.java -text
 src/com/ceridwen/util/Spooler.java -text
