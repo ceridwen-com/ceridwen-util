@@ -121,7 +121,7 @@
   <property category="sys" name="JDK" value="java version 1.4.2_04-b05"/>
   <property category="sys" name="JvmVersion" value="1.2"/>
   <property category="sys" name="LastTag" value="0"/>
-  <property category="sys" name="Libraries" value="Apache Commons Logging 1.0.3;Apache Commons Net 1.1.0"/>
+  <property category="sys" name="Libraries" value="Apache Commons Logging 1.0.4;Apache Commons Net 1.2.2"/>
   <property category="sys" name="MakeStable" value="0"/>
   <property category="sys" name="OutPath" value="classes"/>
   <property category="sys" name="SourcePath" value="src;test"/>
@@ -133,6 +133,10 @@
   <property category="sys" name="WorkingDirectory" value="."/>
   <property category="sys" name="ant.usehostjdk" value="0"/>
   <property category="sys" name="ant.useprojectlibraries" value="1"/>
+  <property category="team" name="ignorePath.0" value="ceridwen-utilities.jar"/>
+  <property category="team" name="ignorePath.1" value="classes"/>
+  <property category="team" name="ignorePath.2" value="Utilities.refactor"/>
+  <property category="team" name="ignorePath.3" value="bak"/>
   <node name="ceridwen-utilities" type="Archive">
     <property category="archiving" name="contentRules.1" value="I:**/*.*"/>
     <property category="archiving" name="obfuscator" value="RetroGuard for J2ME"/>
@@ -140,4 +144,8 @@
     <property category="archiving" name="targetPath" value="ceridwen-utilities.jar"/>
     <property category="archiving" name="usingRules" value="1"/>
   </node>
+  <file path="src/com/ceridwen/util/versioning/AboutDialog.num"/>
+  <file path="src/com/ceridwen/util/versioning/ComponentRegistry.num"/>
+  <file path="src/com/ceridwen/util/logging/SMTPLogHandler.num"/>
+  <file path="src/com/ceridwen/util/Spooler.num"/>
 </project>
