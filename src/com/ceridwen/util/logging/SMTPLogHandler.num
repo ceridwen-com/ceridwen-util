@@ -1,8 +1,8 @@
 #Contents updated by BuildNumberOT
-#Mon Oct 11 23:09:51 BST 2004
-version=1.0.77
-date=Mon Oct 11 23\:09\:51 BST 2004
+#Thu Oct 14 23:26:35 BST 2004
+version=1.0.80
 name=Ceridwen Utils\: SMTP Log Handler
+date=Thu Oct 14 23\:26\:35 BST 2004
 author=Matthew J. Dovey
-epoch=1097532591151
-build=77
+epoch=1097792795401
+build=80

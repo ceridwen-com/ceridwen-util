@@ -41,7 +41,6 @@ public class TimeoutSocketFactory
       UnknownHostException, IOException {
     InetSocketAddress sAdd = new InetSocketAddress(string, _int);
     Socket socket = new Socket();
-    System.out.println("Timeout: " + connectionTimeout);
     socket.connect(sAdd, connectionTimeout);
     return socket;
   }
