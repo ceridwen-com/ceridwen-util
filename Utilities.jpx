@@ -144,6 +144,11 @@
     <property category="archiving" name="targetPath" value="ceridwen-utilities.jar"/>
     <property category="archiving" name="usingRules" value="1"/>
   </node>
+  <node name="Source" type="Archive">
+    <property category="archiving" name="archiverClass" value="com.borland.jbuilder.wizard.archive.SourceArchiver"/>
+    <property category="archiving" name="targetCompressed" value="1"/>
+    <property category="archiving" name="targetPath" value="Utilities-src.jar"/>
+  </node>
   <file path="src/com/ceridwen/util/versioning/AboutDialog.num"/>
   <file path="src/com/ceridwen/util/versioning/ComponentRegistry.num"/>
   <file path="src/com/ceridwen/util/logging/SMTPLogHandler.num"/>

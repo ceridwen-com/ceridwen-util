@@ -55,6 +55,9 @@ class MailerDaemon extends Thread {
   }
 
   private synchronized void sendMail() {
+    return;
+
+/**
     Stack failed = new Stack();
     try {
       SMTPClient smtp = new SMTPClient();
@@ -90,6 +93,7 @@ class MailerDaemon extends Thread {
     while (count < 50 & !failed.isEmpty()) {
       queue.push(failed.pop());
     }
+ **/
   }
 
   private boolean active;
