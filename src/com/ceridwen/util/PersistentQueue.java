@@ -30,9 +30,12 @@ public class PersistentQueue implements Queue {
         if (files.length > 0) {
           log.trace("Loading queued object");
           XMLDecoder xml = new XMLDecoder(new FileInputStream(files[0]));
-          Object o = (Object) xml.readObject();
-          if (o == null)
-            throw new java.lang.NullPointerException("Loaded object was null");
+          Object o = null;
+          try {
+            o = (Object) xml.readObject();
+          } catch (Exception ex) {
+            log.error("Problem loading object", ex);
+          }
           xml.close();
           log.trace("Deleting queued object");
           if (!files[0].delete())
