@@ -126,7 +126,7 @@ class MailerDaemon extends Thread {
   }
 }
 
-public class SMTPLogHandler extends java.util.logging.Handler {
+public class SMTPLogHandler extends AbstractLogHandler {
   MailerDaemon daemon;
   String recipient;
 
@@ -139,51 +139,14 @@ public class SMTPLogHandler extends java.util.logging.Handler {
   public void flush() {
   }
 
-  public void publish(LogRecord record) {
-    if (!this.isLoggable(record)) {
-      return;
-    }
-
-    Formatter format = this.getFormatter();
-    if (format == null)
-      format = new java.util.logging.XMLFormatter();
-
-    String message = format.format(record);
-    try {
-      StringBuffer components = new StringBuffer("\r\nRegistered Components:");
-      Iterator iter = com.ceridwen.util.versioning.ComponentRegistry.listRegisteredComponents();
-      while (iter.hasNext()) {
-        Class component = (Class)iter.next();
-        components.append("\r\n" +
-                          com.ceridwen.util.versioning.ComponentRegistry.
-                          getName(component) +
-                          ". " +
-                          com.ceridwen.util.versioning.ComponentRegistry.
-                          getVersionString(component) +
-                          " - " +
-                          com.ceridwen.util.versioning.ComponentRegistry.
-                          getAuthor(component) + ".");
-      }
-
-      StringBuffer environment = new StringBuffer("\r\nEnvironment:");
-      Properties props = System.getProperties();
-      Enumeration enumerate = props.keys();
-      while (enumerate.hasMoreElements()) {
-        String key = (String)enumerate.nextElement();
-        environment.append("\r\n" + key + "=" + props.getProperty(key));
-      }
-      message = message + "\r\n" + components.toString() + "\r\n" + environment;
-    } catch (Exception ex) {
-      ex.printStackTrace();
-    }
-
+  void sendMessage(String logger, int level, String message) {
     String hostname = "unknown";
     try {
       hostname = java.net.InetAddress.getLocalHost().getCanonicalHostName();
     } catch (Exception ex) {
 
     }
-    daemon.addToQueue(new String[]{recipient}, "Java Log Report for " + hostname + " - " + record.getLoggerName(), message);
+    daemon.addToQueue(new String[]{recipient}, "Java Log Report for " + hostname + " - " + logger, message);
   }
 
   public void close() throws java.lang.SecurityException {

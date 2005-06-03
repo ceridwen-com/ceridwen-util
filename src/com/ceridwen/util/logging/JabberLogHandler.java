@@ -9,7 +9,7 @@ import org.jivesoftware.smack.packet.Packet;
 import org.jivesoftware.smack.packet.*;
 
 public class JabberLogHandler
-    extends Handler {
+    extends AbstractLogHandler {
 
   private String host;
   private int port;
@@ -93,56 +93,16 @@ public class JabberLogHandler
   public void flush() {
   }
 
-  /**
-   * Publish a <tt>LogRecord</tt>.
-   *
-   * @param record description of the log event
-   * @todo Implement this java.util.logging.Handler method
-   */
-  public void publish(LogRecord record) {
-    if (!this.isLoggable(record)) {
-       return;
-     }
-
-     Formatter format = this.getFormatter();
-     if (format == null)
-       format = new java.util.logging.XMLFormatter();
-
-     String message = format.format(record);
-     try {
-       StringBuffer components = new StringBuffer("\r\nRegistered Components:");
-       Iterator iter = com.ceridwen.util.versioning.ComponentRegistry.listRegisteredComponents();
-       while (iter.hasNext()) {
-         Class component = (Class)iter.next();
-         components.append("\r\n" +
-                           com.ceridwen.util.versioning.ComponentRegistry.
-                           getName(component) +
-                           ". " +
-                           com.ceridwen.util.versioning.ComponentRegistry.
-                           getVersionString(component) +
-                           " - " +
-                           com.ceridwen.util.versioning.ComponentRegistry.
-                           getAuthor(component) + ".");
-       }
-
-       StringBuffer environment = new StringBuffer("\r\nEnvironment:");
-       Properties props = System.getProperties();
-       Enumeration enumerate = props.keys();
-       while (enumerate.hasMoreElements()) {
-         String key = (String)enumerate.nextElement();
-         environment.append("\r\n" + key + "=" + props.getProperty(key));
-       }
-       message = message + "\r\n" + components.toString() + "\r\n" +
-           environment;
-       if (chatroom) {
-         groupchat.sendMessage(message);
-       }
-       else {
-         chat.sendMessage(message);
-       }
-
-     } catch (Exception ex) {
-       ex.printStackTrace();
+  void sendMessage(String logger, int level, String message) {
+    try {
+      if (chatroom) {
+        groupchat.sendMessage(message);
+      }
+      else {
+        chat.sendMessage(message);
+      }
+    }
+    catch (XMPPException ex) {
     }
   }
 }
