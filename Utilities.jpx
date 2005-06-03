@@ -121,7 +121,7 @@
   <property category="sys" name="JDK" value="java version 1.4.2_04-b05"/>
   <property category="sys" name="JvmVersion" value="1.2"/>
   <property category="sys" name="LastTag" value="0"/>
-  <property category="sys" name="Libraries" value="Apache Commons Logging 1.0.4;Apache Commons Net 1.2.2"/>
+  <property category="sys" name="Libraries" value="Apache Commons Logging 1.0.4;Apache Commons Net 1.2.2;Smack"/>
   <property category="sys" name="MakeStable" value="0"/>
   <property category="sys" name="OutPath" value="classes"/>
   <property category="sys" name="SourcePath" value="src;test"/>
