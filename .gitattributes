@@ -8,6 +8,7 @@ src/com/ceridwen/util/Spooler.num -text
 src/com/ceridwen/util/SpoolerProcessor.java -text
 src/com/ceridwen/util/TransientQueue.java -text
 src/com/ceridwen/util/encryption/TEAAlgorithm.java -text
+src/com/ceridwen/util/logging/JabberLogHandler.java -text
 src/com/ceridwen/util/logging/SMTPLogHandler.java -text
 src/com/ceridwen/util/logging/SMTPLogHandler.num -text
 src/com/ceridwen/util/net/TimeoutSocketFactory.java -text

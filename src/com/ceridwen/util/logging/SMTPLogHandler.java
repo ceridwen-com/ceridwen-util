@@ -167,9 +167,9 @@ public class SMTPLogHandler extends java.util.logging.Handler {
 
       StringBuffer environment = new StringBuffer("\r\nEnvironment:");
       Properties props = System.getProperties();
-      Enumeration enum = props.keys();
-      while (enum.hasMoreElements()) {
-        String key = (String)enum.nextElement();
+      Enumeration enumerate = props.keys();
+      while (enumerate.hasMoreElements()) {
+        String key = (String)enumerate.nextElement();
         environment.append("\r\n" + key + "=" + props.getProperty(key));
       }
       message = message + "\r\n" + components.toString() + "\r\n" + environment;
