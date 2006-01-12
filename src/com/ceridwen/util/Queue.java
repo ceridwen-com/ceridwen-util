@@ -10,8 +10,8 @@ package com.ceridwen.util;
  */
 
 public interface Queue {
-  public void add(Object o);
-  public Object remove();
-  public boolean isEmpty();
-  public int size();
+  void add(Object o);
+  Object remove();
+  boolean isEmpty();
+  int size();
 }

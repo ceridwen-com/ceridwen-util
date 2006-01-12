@@ -1,5 +1,5 @@
 package com.ceridwen.util.encryption;
-import java.math.*;
+import java.math.BigInteger;
 
 /** * Tiny Encryption Algorithm. *
  *

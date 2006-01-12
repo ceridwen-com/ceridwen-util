@@ -10,5 +10,5 @@ package com.ceridwen.util;
  */
 
 public interface SpoolerProcessor {
-  public boolean process(Object o);
+  boolean process(Object o);
 }

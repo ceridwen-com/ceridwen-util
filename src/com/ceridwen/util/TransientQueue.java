@@ -20,10 +20,11 @@ public class TransientQueue implements Queue {
     items.add(o);
   }
   public Object remove() {
-    if (items.isEmpty())
+    if (items.isEmpty()) {
       return null;
-    else
+    } else {
       return items.remove(0);
+    }
   }
   public boolean isEmpty() {
     return items.isEmpty();

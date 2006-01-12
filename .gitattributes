@@ -9,10 +9,14 @@ src/com/ceridwen/util/SpoolerProcessor.java -text
 src/com/ceridwen/util/TransientQueue.java -text
 src/com/ceridwen/util/encryption/TEAAlgorithm.java -text
 src/com/ceridwen/util/logging/AbstractLogHandler.java -text
+src/com/ceridwen/util/logging/JMXLogHandler.java -text
+src/com/ceridwen/util/logging/JMXLogHandler.num -text
+src/com/ceridwen/util/logging/JMXLogHandlerMBean.java -text
 src/com/ceridwen/util/logging/JabberLogHandler.java -text
 src/com/ceridwen/util/logging/SMTPLogHandler.java -text
 src/com/ceridwen/util/logging/SMTPLogHandler.num -text
 src/com/ceridwen/util/logging/SyslogLogHandler.java -text
+src/com/ceridwen/util/management/notification/ThreadedNotificationBroadcasterSupport.java -text
 src/com/ceridwen/util/net/TimeoutSocketFactory.java -text
 src/com/ceridwen/util/versioning/AboutDialog.java -text
 src/com/ceridwen/util/versioning/AboutDialog.num -text

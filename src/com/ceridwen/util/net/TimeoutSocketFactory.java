@@ -1,11 +1,12 @@
 package com.ceridwen.util.net;
 
-import org.apache.commons.net.*;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.net.InetAddress;
+
+import org.apache.commons.net.DefaultSocketFactory;
 
 /**
  * <p>Title: </p>
@@ -21,7 +22,7 @@ import java.net.InetAddress;
  */
 public class TimeoutSocketFactory
     extends DefaultSocketFactory {
-  int connectionTimeout = 0;
+  private int connectionTimeout = 0;
 
   public TimeoutSocketFactory(int _int) {
     connectionTimeout = _int;
@@ -35,7 +36,6 @@ public class TimeoutSocketFactory
    * @return Socket
    * @throws UnknownHostException
    * @throws IOException
-   * @todo Implement this org.apache.commons.net.SocketFactory method
    */
   public Socket createSocket(String string, int _int) throws
       UnknownHostException, IOException {
@@ -52,7 +52,6 @@ public class TimeoutSocketFactory
    * @param _int int
    * @return Socket
    * @throws IOException
-   * @todo Implement this org.apache.commons.net.SocketFactory method
    */
   public Socket createSocket(InetAddress inetAddress, int _int) throws
       IOException {
@@ -72,7 +71,6 @@ public class TimeoutSocketFactory
    * @param _int3 int
    * @return Socket
    * @throws IOException
-   * @todo Implement this org.apache.commons.net.SocketFactory method
    */
   public Socket createSocket(InetAddress inetAddress, int _int,
                              InetAddress inetAddress2, int _int3) throws
@@ -96,7 +94,6 @@ public class TimeoutSocketFactory
    * @return Socket
    * @throws UnknownHostException
    * @throws IOException
-   * @todo Implement this org.apache.commons.net.SocketFactory method
    */
   public Socket createSocket(String string, int _int, InetAddress inetAddress,
                              int _int3) throws UnknownHostException,

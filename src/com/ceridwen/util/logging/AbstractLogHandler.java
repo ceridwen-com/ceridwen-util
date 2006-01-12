@@ -1,12 +1,12 @@
 package com.ceridwen.util.logging;
 
-import java.util.logging.Handler;
-import java.util.logging.LogRecord;
-import java.util.logging.Formatter;
-import java.util.logging.XMLFormatter;
+import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.Properties;
-import java.util.Enumeration;
+import java.util.logging.Formatter;
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
+import java.util.logging.XMLFormatter;
 
 abstract public class AbstractLogHandler
     extends Handler {
@@ -14,13 +14,12 @@ abstract public class AbstractLogHandler
     super();
   }
 
-  abstract void sendMessage(String logger, int level, String message);
+  abstract protected void sendMessage(String logger, String level, String message);
 
   /**
    * Publish a <tt>LogRecord</tt>.
    *
    * @param record description of the log event
-   * @todo Implement this java.util.logging.Handler method
    */
   public void publish(LogRecord record) {
     if (!this.isLoggable(record)) {
@@ -28,9 +27,9 @@ abstract public class AbstractLogHandler
     }
 
     Formatter format = this.getFormatter();
-    if (format == null)
+    if (format == null) {
       format = new XMLFormatter();
-
+    }
     String message = format.format(record);
     try {
       StringBuffer components = new StringBuffer("\r\nRegistered Components:");
@@ -58,7 +57,7 @@ abstract public class AbstractLogHandler
       }
       message = message + "\r\n" + components.toString() + "\r\n" +
           environment;
-      sendMessage(record.getLoggerName(), 0, message);
+      sendMessage(record.getLoggerName(), record.getLevel().getName(), message);
 
     }
     catch (Exception ex) {

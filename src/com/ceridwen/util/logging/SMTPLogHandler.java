@@ -1,14 +1,12 @@
 package com.ceridwen.util.logging;
 
-import java.util.Enumeration;
-import java.util.Properties;
-import java.util.Stack;
-import org.apache.commons.net.smtp.*;
-import java.util.Date;
-import java.util.Iterator;
-import java.lang.StringBuffer;
-import java.util.logging.*;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Stack;
+
+import org.apache.commons.net.smtp.SMTPClient;
+import java.net.UnknownHostException;
+import java.net.InetAddress;
 
 /**
  * <p>Title: RTSI</p>
@@ -23,6 +21,53 @@ import java.text.SimpleDateFormat;
  *
  */
 
+public class SMTPLogHandler extends AbstractLogHandler {
+  private MailerDaemon daemon;
+  private String recipient;
+
+  public SMTPLogHandler(String host, String recipient) {
+    this.recipient = recipient;
+    daemon = new MailerDaemon(host, "logger@ceridwen.com");
+    daemon.start();
+  }
+
+  public void flush() {
+  }
+
+  protected void sendMessage(String logger, String level, String message) {
+    String hostname = "unknown";
+    try {
+      hostname = java.net.InetAddress.getLocalHost().getCanonicalHostName();
+    } catch (Exception ex) {
+    }
+
+    String address = "";
+    InetAddress addr = null;
+    try {
+      addr = InetAddress.getLocalHost();
+      byte[] ip = addr.getAddress();
+      for (int i = 0; i < ip.length; i++) {
+        address += Integer.toString((int)(ip[i] & 0x00ff));
+        if (i < (ip.length-1)) {
+          address += ".";
+        }
+      }
+    } catch (UnknownHostException ex1) {
+    }
+
+
+    daemon.addToQueue(new String[]{recipient}, "Java Log Report for " + hostname + " (" + address + ") - " + logger, message);
+  }
+
+  public void close() throws java.lang.SecurityException {
+    daemon.stopMailer();
+  }
+
+  static {
+    com.ceridwen.util.versioning.ComponentRegistry.registerComponent(SMTPLogHandler.class);
+  }
+
+}
 
 class QueuedMail {
   public QueuedMail(String[] r, String s, String m) {
@@ -42,7 +87,7 @@ class MailerDaemon extends Thread {
 
   private String mailfrom;
   private String mailrelay;
-  Stack queue = new Stack();
+  private Stack queue = new Stack();
 
   public MailerDaemon(String relay, String from) {
     mailfrom = from;
@@ -55,9 +100,6 @@ class MailerDaemon extends Thread {
   }
 
   private synchronized void sendMail() {
-    return;
-
-/**
     Stack failed = new Stack();
     try {
       SMTPClient smtp = new SMTPClient();
@@ -67,8 +109,9 @@ class MailerDaemon extends Thread {
         while (!queue.isEmpty()) {
           QueuedMail mail = (QueuedMail) queue.pop();
           StringBuffer expandTo = new StringBuffer();
-          if (mail.recipients.length > 0)
+          if (mail.recipients.length > 0) {
             expandTo.append(mail.recipients[0]);
+          }
           for (int n=1; n<mail.recipients.length; n++) {
             expandTo.append(",");
             expandTo.append(mail.recipients[n]);
@@ -79,8 +122,9 @@ class MailerDaemon extends Thread {
                                       "To: " + expandTo + "\r\n" +
                                       "Date: " + new SimpleDateFormat("E, d MMM yyyy HH:mm:ss Z").format(mail.date) + "\r\n" +
                                       "Subject: " + mail.subject + "\r\n\r\n" +
-                                      mail.message))
+                                      mail.message)) {
             failed.push(mail);
+          }
         }
       }
       smtp.logout();
@@ -92,8 +136,8 @@ class MailerDaemon extends Thread {
     int count = 0;
     while (count < 50 & !failed.isEmpty()) {
       queue.push(failed.pop());
+      count++;
     }
- **/
   }
 
   private boolean active;
@@ -102,7 +146,7 @@ class MailerDaemon extends Thread {
     active = false;
   }
 
-  int timer;
+  private int timer;
 
   public void run() {
     active = true;
@@ -112,10 +156,11 @@ class MailerDaemon extends Thread {
       }
       timer = 5;
       while (timer > 0) {
-        if (!active)
+        if (!active) {
           return;
+        }
         try {
-          this.sleep(1000);
+          sleep(1000);
           timer--;
         }
         catch (Exception ex) {
@@ -124,37 +169,4 @@ class MailerDaemon extends Thread {
       }
     }
   }
-}
-
-public class SMTPLogHandler extends AbstractLogHandler {
-  MailerDaemon daemon;
-  String recipient;
-
-  public SMTPLogHandler(String host, String recipient) {
-    this.recipient = recipient;
-    daemon = new MailerDaemon(host, "logger@ceridwen.com");
-    daemon.start();
-  }
-
-  public void flush() {
-  }
-
-  void sendMessage(String logger, int level, String message) {
-    String hostname = "unknown";
-    try {
-      hostname = java.net.InetAddress.getLocalHost().getCanonicalHostName();
-    } catch (Exception ex) {
-
-    }
-    daemon.addToQueue(new String[]{recipient}, "Java Log Report for " + hostname + " - " + logger, message);
-  }
-
-  public void close() throws java.lang.SecurityException {
-    daemon.stopMailer();
-  }
-
-  static {
-    com.ceridwen.util.versioning.ComponentRegistry.registerComponent(SMTPLogHandler.class);
-  }
-
 }

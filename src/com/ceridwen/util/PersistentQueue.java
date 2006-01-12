@@ -14,15 +14,19 @@ package com.ceridwen.util;
  */
 
 
-import java.util.*;
-import java.io.*;
-import java.beans.*;
-import org.apache.commons.logging.*;
+import java.beans.XMLDecoder;
+import java.beans.XMLEncoder;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 public class PersistentQueue implements Queue {
   private static Log log = LogFactory.getLog(PersistentQueue.class);
 
-  File store;
+  private File store;
 
   private synchronized Object load() {
       try {
@@ -32,16 +36,20 @@ public class PersistentQueue implements Queue {
           XMLDecoder xml = new XMLDecoder(new FileInputStream(files[0]));
           Object o = null;
           try {
-            o = (Object) xml.readObject();
+            o = xml.readObject();
           } catch (Exception ex) {
             log.error("Problem loading object", ex);
           }
           xml.close();
           log.trace("Deleting queued object");
-          if (!files[0].delete())
-            throw new java.lang.NullPointerException("Loaded object was not deleted");
-          if (files[0].exists())
-            throw new java.lang.NullPointerException("Loaded object was still present");
+          if (!files[0].delete()) {
+            throw new java.lang.NullPointerException(
+                "Loaded object was not deleted");
+          }
+          if (files[0].exists()) {
+            throw new java.lang.NullPointerException(
+                "Loaded object was still present");
+          }
           log.trace("Returning queued object");
           return o;
         } else {
@@ -53,7 +61,7 @@ public class PersistentQueue implements Queue {
       }
   }
 
-  java.util.Random rand = new java.util.Random();
+  private java.util.Random rand = new java.util.Random();
 
   private String UID(Object o) {
     String id = Long.toHexString(System.currentTimeMillis()) + "-" + Integer.toHexString(o.hashCode()) + "-" + Integer.toHexString(rand.nextInt());
@@ -76,8 +84,9 @@ public class PersistentQueue implements Queue {
       store = file;
 
       if (!store.exists()) {
-        if (!store.mkdirs())
+        if (!store.mkdirs()) {
           throw new java.io.FileNotFoundException();
+        }
       }
 
       if (!store.isDirectory()) {
@@ -150,10 +159,10 @@ public class PersistentQueue implements Queue {
 
     int size = -1;
     while (true) {
-//      if (q.size() != size) {
-//        System.out.println("Size: " + q.size());
-//        size = q.size();
-//      }
+      if (q.size() != size) {
+        System.out.println("Size: " + q.size());
+        size = q.size();
+      }
     }
   }
 

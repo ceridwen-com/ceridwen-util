@@ -1,12 +1,10 @@
 package com.ceridwen.util.logging;
 
-import java.util.logging.*;
-import java.util.Properties;
-import java.util.Iterator;
-import java.util.Enumeration;
-import org.jivesoftware.smack.*;
-import org.jivesoftware.smack.packet.Packet;
-import org.jivesoftware.smack.packet.*;
+import org.jivesoftware.smack.Chat;
+import org.jivesoftware.smack.GroupChat;
+import org.jivesoftware.smack.SSLXMPPConnection;
+import org.jivesoftware.smack.XMPPConnection;
+import org.jivesoftware.smack.XMPPException;
 
 public class JabberLogHandler
     extends AbstractLogHandler {
@@ -16,10 +14,10 @@ public class JabberLogHandler
   private String username;
   private String password;
   private String recipient;
-  private boolean chatroom = false;
+  private final boolean chatroom = false;
   private String nickname;
   private String app;
-  private boolean SSL = false;
+  private final boolean SSL = false;
 
   protected XMPPConnection con;
   protected Chat chat;
@@ -55,7 +53,7 @@ public class JabberLogHandler
           // Start a conversation with IMAddress
           if (chatroom) {
               groupchat = con.createGroupChat(recipient);
-              groupchat.join(nickname != null ? nickname : username);
+              groupchat.join((nickname != null)?nickname:username);
           } else {
               chat = con.createChat(recipient);
           }
@@ -71,14 +69,13 @@ public class JabberLogHandler
    *
    * @throws SecurityException if a security manager exists and if the caller
    *   does not have <tt>LoggingPermission("control")</tt>.
-   * @todo Implement this java.util.logging.Handler method
    */
   public void close() throws SecurityException {
     // Closes the connection by setting presence to unavailable
     // then closing the stream to the XMPP server.
-    if (con != null)
-        con.close();
-
+    if (con != null) {
+      con.close();
+    }
     // Help GC
     con = null;
     chat = null;
@@ -88,12 +85,11 @@ public class JabberLogHandler
   /**
    * Flush any buffered output.
    *
-   * @todo Implement this java.util.logging.Handler method
    */
   public void flush() {
   }
 
-  void sendMessage(String logger, int level, String message) {
+  protected void sendMessage(String logger, String level, String message) {
     try {
       if (chatroom) {
         groupchat.sendMessage(message);

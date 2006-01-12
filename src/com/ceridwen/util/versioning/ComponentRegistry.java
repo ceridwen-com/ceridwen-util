@@ -9,11 +9,13 @@ package com.ceridwen.util.versioning;
  * @version 1.0
  */
 
-import java.util.*;
-import java.io.*;
+import java.io.InputStream;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.Properties;
 
 public class ComponentRegistry {
-  static Hashtable components = new Hashtable();
+  private static Hashtable components = new Hashtable();
 
   public static void registerComponent(Class component) {
     InputStream in = null;
@@ -37,38 +39,44 @@ public class ComponentRegistry {
   }
   public static String getVersion(Class component) {
     Properties props = (Properties)components.get(component);
-    if (props == null)
+    if (props == null) {
       return null;
+    }
     return props.getProperty("version","");
   }
   public static long getBuild(Class component) {
     Properties props = (Properties)components.get(component);
-    if (props == null)
+    if (props == null) {
       return 0;
+    }
     return Long.parseLong(props.getProperty("build","0"));
   }
   public static String getBuildDate(Class component) {
     Properties props = (Properties)components.get(component);
-    if (props == null)
+    if (props == null) {
       return null;
+    }
     return props.getProperty("date","");
   }
   public static long getEpoch(Class component) {
     Properties props = (Properties)components.get(component);
-    if (props == null)
+    if (props == null) {
       return 0;
+    }
     return Long.parseLong(props.getProperty("epoch","0"));
   }
   public static String getAuthor(Class component) {
     Properties props = (Properties)components.get(component);
-    if (props == null)
+    if (props == null) {
       return null;
+    }
     return props.getProperty("author","");
   }
   public static String getName(Class component) {
     Properties props = (Properties)components.get(component);
-    if (props == null)
+    if (props == null) {
       return null;
+    }
     return props.getProperty("name","");
   }
 

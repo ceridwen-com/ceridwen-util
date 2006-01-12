@@ -1,7 +1,10 @@
 package com.ceridwen.util;
 
-import org.apache.commons.logging.*;
-import java.util.*;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <p>Title: RTSI</p>
@@ -20,10 +23,11 @@ public class Spooler extends TimerTask implements Queue {
 
   public Spooler(Queue queue, SpoolerProcessor processor, long period) {
     this.queue = queue;
-    this.processor = (SpoolerProcessor)processor;
+    this.processor = processor;
     scheduler = new Timer();
-    if (period < 1)
+    if (period < 1) {
       period = 600000;
+    }
     scheduler.schedule(this, period, period);
   }
 

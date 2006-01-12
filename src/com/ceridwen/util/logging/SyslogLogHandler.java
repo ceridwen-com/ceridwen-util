@@ -35,8 +35,12 @@
 
 package com.ceridwen.util.logging;
 
-import java.net.*;
-import java.io.*;
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 
 public class SyslogLogHandler
     extends AbstractLogHandler {
@@ -80,7 +84,7 @@ public class SyslogLogHandler
   public static final int LOG_NDELAY = 0x08; // don't delay open
   public static final int LOG_NOWAIT = 0x10; // don't wait for console forks
 
-  private final int logopt = LOG_CONS | LOG_NDELAY | LOG_NOWAIT;
+//  private final int logopt = LOG_CONS | LOG_NDELAY | LOG_NOWAIT;
   private final int facility = LOG_LOCAL0;
 
   private int port = 514;
@@ -99,14 +103,31 @@ public class SyslogLogHandler
   // class provides constants for these fields. The msg is what is
   // actually logged.
   // @exception SyslogException if there was a problem
+  public void sendMessage(String logger, String level, String message) {
+    sendMessage(logger, LOG_ALERT, message);
+  }
+
+  public void getBytes(String src, int srcBegin,
+                       int srcEnd,
+                       byte[] dst,
+                       int dstBegin) {
+    try {
+      byte[] buffer = src.getBytes("ISO-8859-1");
+
+      for (int i = 0; (i < (srcEnd - srcBegin) + 1) && (i < (buffer.length - dstBegin) + 1); i++) {
+        dst[dstBegin + i] = buffer[srcBegin + i];
+      }
+    } catch (Exception ex) {
+      ex.printStackTrace(System.err);
+    }
+  }
+
 
   public void sendMessage(String ident, int priority, String msg) {
     int pricode;
     int length;
-    int idx, sidx, nidx;
-    StringBuffer buffer;
+    int idx;
     byte[] data;
-    byte[] numbuf = new byte[32];
     String strObj;
 
     DatagramPacket packet;
@@ -146,18 +167,18 @@ public class SyslogLogHandler
     data[idx++] = (byte) '<';
 
     strObj = priObj.toString(priObj.intValue());
-    strObj.getBytes(0, strObj.length(), data, idx);
+    getBytes(strObj, 0, strObj.length(), data, idx);
     idx += strObj.length();
 
     data[idx++] = (byte) '>';
 
-    ident.getBytes(0, ident.length(), data, idx);
+    getBytes(ident, 0, ident.length(), data, idx);
     idx += ident.length();
 
     data[idx++] = (byte) ':';
     data[idx++] = (byte) ' ';
 
-    msg.getBytes(0, msg.length(), data, idx);
+    getBytes(msg, 0, msg.length(), data, idx);
     idx += msg.length();
 
     data[idx] = 0;
@@ -187,7 +208,6 @@ public class SyslogLogHandler
    *
    * @throws SecurityException if a security manager exists and if the caller
    *   does not have <tt>LoggingPermission("control")</tt>.
-   * @todo Implement this java.util.logging.Handler method
    */
   public void close() throws SecurityException {
   }
@@ -195,7 +215,6 @@ public class SyslogLogHandler
   /**
    * Flush any buffered output.
    *
-   * @todo Implement this java.util.logging.Handler method
    */
   public void flush() {
   }
@@ -206,7 +225,12 @@ public class SyslogLogHandler
    * @param logger String
    * @param level int
    * @param message String
-   * @todo Implement this com.ceridwen.util.logging.AbstractLogHandler method
    */
+
+  public static void main(String args[]) {
+    SyslogLogHandler test = new SyslogLogHandler("host.ceridwen.com", 514);
+    test.sendMessage("test", 0, "test");
+
+  }
 
 }

@@ -1,9 +1,18 @@
 package com.ceridwen.util.versioning;
 
-import javax.swing.*;
-import javax.swing.table.*;
-import java.awt.*;
-import java.util.*;
+import java.util.Iterator;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Frame;
+import java.awt.GridLayout;
+import java.awt.HeadlessException;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  * <p>Title: RTSI</p>
@@ -15,14 +24,14 @@ import java.util.*;
  */
 
 public class AboutDialog extends JDialog {
-  JPanel jPanel1 = new JPanel();
-  JScrollPane jScrollPane1 = new JScrollPane();
-  JLabel AppAuthorField = new JLabel();
-  JLabel AppVersionField = new JLabel();
-  JLabel AppNameField = new JLabel();
-  JTable ComponentsTable = new JTable();
-  Class app;
-  GridLayout gridLayout1 = new GridLayout();
+  private JPanel jPanel1 = new JPanel();
+  private JScrollPane jScrollPane1 = new JScrollPane();
+  private JLabel AppAuthorField = new JLabel();
+  private JLabel AppVersionField = new JLabel();
+  private JLabel AppNameField = new JLabel();
+  private JTable ComponentsTable = new JTable();
+  private Class app;
+  private GridLayout gridLayout1 = new GridLayout();
 
   public AboutDialog(Frame frame, boolean modal, Class app) throws HeadlessException {
     super(frame,modal);
@@ -62,20 +71,26 @@ public class AboutDialog extends JDialog {
   static {
     ComponentRegistry.registerComponent(AboutDialog.class);
   }
-  public void show() {
-    DefaultTableModel table = new DefaultTableModel();
-    table.addColumn("Component");
-    table.addColumn("Version");
-    table.addColumn("Author");
-    Iterator iterate = ComponentRegistry.listRegisteredComponents();
-    while (iterate.hasNext()) {
-      Class component = (Class)iterate.next();
-      if (component != app)
-        table.addRow(new String[]{ComponentRegistry.getName(component), ComponentRegistry.getVersionString(component), ComponentRegistry.getAuthor(component)});
+
+  public void setVisible(boolean b) {
+    if (b) {
+      DefaultTableModel table = new DefaultTableModel();
+      table.addColumn("Component");
+      table.addColumn("Version");
+      table.addColumn("Author");
+      Iterator iterate = ComponentRegistry.listRegisteredComponents();
+      while (iterate.hasNext()) {
+        Class component = (Class) iterate.next();
+        if (component != app) {
+          table.addRow(new String[] {ComponentRegistry.getName(component),
+                       ComponentRegistry.getVersionString(component),
+                       ComponentRegistry.getAuthor(component)});
+        }
+      }
+      ComponentsTable.setModel(table);
+      this.setSize(600, 200);
+      this.doLayout();
     }
-    ComponentsTable.setModel(table);
-    this.setSize(600, 200);
-    this.doLayout();
-    super.show();
+    super.setVisible(b);
   }
 }
