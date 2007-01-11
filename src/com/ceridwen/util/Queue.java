@@ -11,6 +11,7 @@ package com.ceridwen.util;
 
 public interface Queue {
   void add(Object o);
+  Object peek(int n);
   Object remove();
   boolean isEmpty();
   int size();

@@ -58,6 +58,9 @@ public class Spooler extends TimerTask implements Queue {
   public Object remove() {
     return queue.remove();
   }
+  public Object peek(int n) {
+    return queue.peek(n);
+  }
   public boolean isEmpty() {
     return queue.isEmpty();
   }

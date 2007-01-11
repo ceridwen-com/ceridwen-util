@@ -26,6 +26,9 @@ public class TransientQueue implements Queue {
       return items.remove(0);
     }
   }
+  public Object peek(int n) {
+    return items.get(n);
+  }
   public boolean isEmpty() {
     return items.isEmpty();
   }

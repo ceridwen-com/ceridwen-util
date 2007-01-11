@@ -1,8 +1,8 @@
 #Contents updated by BuildNumberOT
-#Fri Dec 16 20:20:25 GMT 2005
-version=1.00.15
+#Fri Jan 13 16:04:25 GMT 2006
+version=1.00.17
 name=Ceridwen Utils\: JMX Log Handler
-date=Fri Dec 16 20\:20\:25 GMT 2005
+date=Fri Jan 13 16\:04\:25 GMT 2006
 author=Matthew J. Dovey
-epoch=1134764425203
-build=15
+epoch=1137168265890
+build=17

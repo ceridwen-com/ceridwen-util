@@ -28,12 +28,12 @@ public class PersistentQueue implements Queue {
 
   private File store;
 
-  private synchronized Object load() {
+  private synchronized Object load(int n, boolean delete) {
       try {
         File [] files = store.listFiles();
         if (files.length > 0) {
           log.trace("Loading queued object");
-          XMLDecoder xml = new XMLDecoder(new FileInputStream(files[0]));
+          XMLDecoder xml = new XMLDecoder(new FileInputStream(files[n]));
           Object o = null;
           try {
             o = xml.readObject();
@@ -41,14 +41,16 @@ public class PersistentQueue implements Queue {
             log.error("Problem loading object", ex);
           }
           xml.close();
-          log.trace("Deleting queued object");
-          if (!files[0].delete()) {
-            throw new java.lang.NullPointerException(
-                "Loaded object was not deleted");
-          }
-          if (files[0].exists()) {
-            throw new java.lang.NullPointerException(
-                "Loaded object was still present");
+          if (delete) {
+            log.trace("Deleting queued object");
+            if (!files[0].delete()) {
+              throw new java.lang.NullPointerException(
+                  "Loaded object was not deleted");
+            }
+            if (files[0].exists()) {
+              throw new java.lang.NullPointerException(
+                  "Loaded object was still present");
+            }
           }
           log.trace("Returning queued object");
           return o;
@@ -102,7 +104,11 @@ public class PersistentQueue implements Queue {
   }
 
   public Object remove() {
-    return this.load();
+    return this.load(0, true);
+  }
+
+  public Object peek(int n) {
+    return this.load(n, false);
   }
 
   public int size() {
