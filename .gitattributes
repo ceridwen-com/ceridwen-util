@@ -1,4 +1,6 @@
 * text=auto !eol
+/.classpath -text
+/.project -text
 /Utilities.jpx -text
 /ceridwen-utilities.jar -text
 src/com/ceridwen/util/PersistentQueue.java -text
