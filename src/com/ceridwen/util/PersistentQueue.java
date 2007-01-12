@@ -133,7 +133,7 @@ public class PersistentQueue implements Queue {
 
   public static void main(String[] args) {
     PersistentQueue q = new PersistentQueue(new File("c:/temp/queue"));
-    Spooler t = new Spooler(q, new SpoolerProcessor() {
+    new Spooler(q, new SpoolerProcessor() {
       public boolean process(Object o) {
         System.out.println("Item: " + o);
         return true;

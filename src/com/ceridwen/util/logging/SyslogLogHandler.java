@@ -149,11 +149,6 @@ public class SyslogLogHandler
           "error creating syslog udp socket: " + e.getMessage());
       return;
     }
-    catch (IOException e) {
-      System.err.println(
-          "error creating syslog udp socket: " + e.getMessage());
-      return;
-    }
 
     pricode = MakePriorityCode(facility, priority);
     Integer priObj = new Integer(pricode);
@@ -166,7 +161,7 @@ public class SyslogLogHandler
     idx = 0;
     data[idx++] = (byte) '<';
 
-    strObj = priObj.toString(priObj.intValue());
+    strObj = Integer.toString(priObj.intValue());
     getBytes(strObj, 0, strObj.length(), data, idx);
     idx += strObj.length();
 

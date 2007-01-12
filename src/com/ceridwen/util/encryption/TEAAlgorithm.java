@@ -214,8 +214,6 @@ public class TEAAlgorithm {
                                                enc.length);
     StringBuffer sb = new StringBuffer();
     byte outb[] = new byte[8];
-    int tmp[] = new int[2];
-    int counter = enc.length / 2;
     for (int i = 0; i < enc.length; i += 2) {
       outb[0] = (byte) (enc[i] >>> 24);
       outb[1] = (byte) (enc[i] >>> 16);
