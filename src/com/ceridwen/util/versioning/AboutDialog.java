@@ -24,7 +24,11 @@ import javax.swing.table.DefaultTableModel;
  */
 
 public class AboutDialog extends JDialog {
-  private JPanel jPanel1 = new JPanel();
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5422140871803919187L;
+private JPanel jPanel1 = new JPanel();
   private JScrollPane jScrollPane1 = new JScrollPane();
   private JLabel AppAuthorField = new JLabel();
   private JLabel AppVersionField = new JLabel();
