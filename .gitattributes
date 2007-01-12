@@ -3,6 +3,15 @@
 /.project -text
 /Utilities.jpx -text
 /ceridwen-utilities.jar -text
+lib/commons-logging-1.1/LICENSE.txt -text
+lib/commons-logging-1.1/NOTICE.txt -text
+lib/commons-logging-1.1/RELEASE-NOTES.txt -text
+lib/commons-logging-1.1/commons-logging-1.1.jar -text
+lib/commons-logging-1.1/commons-logging-adapters-1.1.jar -text
+lib/commons-logging-1.1/commons-logging-api-1.1.jar -text
+lib/commons-net-1.4.1/LICENSE.txt -text
+lib/commons-net-1.4.1/NOTICE.txt -text
+lib/commons-net-1.4.1/commons-net-1.4.1.jar -text
 src/com/ceridwen/util/PersistentQueue.java -text
 src/com/ceridwen/util/Queue.java -text
 src/com/ceridwen/util/Spooler.java -text
