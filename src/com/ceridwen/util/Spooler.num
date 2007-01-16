@@ -1,8 +1,8 @@
-#Contents updated by BuildNumberOT
-#Fri Jan 13 16:04:25 GMT 2006
-version=1.0.157
+#Build Number: src/com/ceridwen/util/Spooler.num
+#Tue Jan 16 10:50:53 GMT 2007
+version=1.0
+date=Tue Jan 16 10\:50\:53 GMT 2007
 name=Ceridwen Utils\: Spoolers
-date=Fri Jan 13 16\:04\:25 GMT 2006
 author=Matthew J. Dovey
 epoch=1137168265890
-build=157
+build=160

@@ -2,6 +2,7 @@
 /.classpath -text
 /.project -text
 /Utilities.jpx -text
+/buildnum.xml -text
 /ceridwen-utilities.jar -text
 lib/commons-logging-1.1/LICENSE.txt -text
 lib/commons-logging-1.1/NOTICE.txt -text

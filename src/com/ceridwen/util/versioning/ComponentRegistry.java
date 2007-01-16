@@ -42,7 +42,7 @@ public class ComponentRegistry {
     if (props == null) {
       return null;
     }
-    return props.getProperty("version","");
+    return props.getProperty("version","") + "." + Long.toString(getBuild(component));
   }
   public static long getBuild(Class component) {
     Properties props = (Properties)components.get(component);
