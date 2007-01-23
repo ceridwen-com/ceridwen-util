@@ -1,5 +1,10 @@
 * text=auto !eol
 /.classpath -text
+.externalToolBuilders/Build[!!-~][!!-~]Number[!!-~]-[!!-~]About[!!-~]Dialog.launch -text
+.externalToolBuilders/Build[!!-~]Number[!!-~]-[!!-~]Component[!!-~]Registry.launch -text
+.externalToolBuilders/Build[!!-~]Number[!!-~]-[!!-~]JMXLogHandler.launch -text
+.externalToolBuilders/Build[!!-~]Number[!!-~]-[!!-~]SMTPLogHandler.launch -text
+.externalToolBuilders/Build[!!-~]Number[!!-~]-[!!-~]Spooler.launch -text
 /.project -text
 /Utilities.jpx -text
 /buildnum.xml -text
