@@ -1,8 +1,8 @@
 #Build Number: src/com/ceridwen/util/logging/SMTPLogHandler.num
-#Tue Jan 16 10:50:54 GMT 2007
+#Tue Mar 09 17:35:40 GMT 2010
 version=1.10
-date=Tue Jan 16 10\:50\:54 GMT 2007
+date=Tue Mar 09 17\:35\:40 GMT 2010
 name=Ceridwen Utils\: SMTP Log Handler
 author=Matthew J. Dovey
 epoch=1137168265890
-build=209
+build=213

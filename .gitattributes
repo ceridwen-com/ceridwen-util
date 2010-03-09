@@ -2,7 +2,6 @@
 /.classpath -text
 .externalToolBuilders/Build[!!-~][!!-~]Number[!!-~]-[!!-~]About[!!-~]Dialog.launch -text
 .externalToolBuilders/Build[!!-~]Number[!!-~]-[!!-~]Component[!!-~]Registry.launch -text
-.externalToolBuilders/Build[!!-~]Number[!!-~]-[!!-~]JMXLogHandler.launch -text
 .externalToolBuilders/Build[!!-~]Number[!!-~]-[!!-~]SMTPLogHandler.launch -text
 .externalToolBuilders/Build[!!-~]Number[!!-~]-[!!-~]Spooler.launch -text
 /.project -text
@@ -26,9 +25,6 @@ src/com/ceridwen/util/SpoolerProcessor.java -text
 src/com/ceridwen/util/TransientQueue.java -text
 src/com/ceridwen/util/encryption/TEAAlgorithm.java -text
 src/com/ceridwen/util/logging/AbstractLogHandler.java -text
-src/com/ceridwen/util/logging/JMXLogHandler.java -text
-src/com/ceridwen/util/logging/JMXLogHandler.num -text
-src/com/ceridwen/util/logging/JMXLogHandlerMBean.java -text
 src/com/ceridwen/util/logging/JabberLogHandler.java -text
 src/com/ceridwen/util/logging/SMTPLogHandler.java -text
 src/com/ceridwen/util/logging/SMTPLogHandler.num -text

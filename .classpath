@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry excluding="com/ceridwen/util/logging/JabberLogHandler.java" kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Apache Commons Logging 1.1.0"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Apache Commons Net 1.4.1"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/commons-logging-1.1/commons-logging-1.1.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging-1.1/commons-logging-adapters-1.1.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging-1.1/commons-logging-api-1.1.jar"/>
+	<classpathentry kind="lib" path="lib/commons-net-1.4.1/commons-net-1.4.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
