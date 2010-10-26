@@ -6,7 +6,7 @@
 .externalToolBuilders/Build[!!-~]Number[!!-~]-[!!-~]Spooler.launch -text
 /.project -text
 /buildnum.xml -text
-/ceridwen-utilities.jar -text
+/ceridwen-utilities.jardesc -text svneol=unset#text/plain
 lib/commons-logging-1.1/LICENSE.txt -text
 lib/commons-logging-1.1/NOTICE.txt -text
 lib/commons-logging-1.1/RELEASE-NOTES.txt -text
