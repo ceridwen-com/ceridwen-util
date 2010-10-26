@@ -23,7 +23,7 @@ import javax.management.NotificationListener;
  */
 
 public class ThreadedNotificationBroadcasterSupport implements NotificationEmitter {
-  private java.util.Hashtable listeners = new java.util.Hashtable();
+  private java.util.Hashtable<NotificationListener, NotificationListenerStuff> listeners = new java.util.Hashtable<NotificationListener, NotificationListenerStuff>();
 
 
   public ThreadedNotificationBroadcasterSupport() {
@@ -66,12 +66,12 @@ class BroadcasterThread extends Thread {
   private NotificationBroadcasterSupport broadcaster = new NotificationBroadcasterSupport();
   private Notification notification;
 
-  public BroadcasterThread(java.util.Hashtable listeners, Notification notification) {
-    Enumeration enumeration = listeners.keys();
+  public BroadcasterThread(java.util.Hashtable<NotificationListener, NotificationListenerStuff> listeners, Notification notification) {
+    Enumeration<NotificationListener> enumeration = listeners.keys();
 
     while (enumeration.hasMoreElements()) {
-      NotificationListener listener = (NotificationListener)enumeration.nextElement();
-      NotificationListenerStuff stuff = (NotificationListenerStuff)listeners.get(listener);
+      NotificationListener listener = enumeration.nextElement();
+      NotificationListenerStuff stuff = listeners.get(listener);
       broadcaster.addNotificationListener(listener, stuff.filter, stuff.handback);
     }
 

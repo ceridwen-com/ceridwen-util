@@ -12,9 +12,9 @@ package com.ceridwen.util;
 import java.util.Vector;
 
 public class TransientQueue implements Queue {
-  private Vector items;
+  private Vector<Object> items;
   public TransientQueue() {
-    items = new Vector();
+    items = new Vector<Object>();
   }
   public void add(Object o) {
     items.add(o);

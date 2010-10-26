@@ -87,7 +87,7 @@ class MailerDaemon extends Thread {
 
   private String mailfrom;
   private String mailrelay;
-  private Stack queue = new Stack();
+  private Stack<QueuedMail> queue = new Stack<QueuedMail>();
 
   public MailerDaemon(String relay, String from) {
     mailfrom = from;
@@ -100,7 +100,7 @@ class MailerDaemon extends Thread {
   }
 
   private synchronized void sendMail() {
-    Stack failed = new Stack();
+    Stack<QueuedMail> failed = new Stack<QueuedMail>();
     try {
       SMTPClient smtp = new SMTPClient();
       smtp.connect(mailrelay);

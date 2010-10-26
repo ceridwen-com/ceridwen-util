@@ -33,10 +33,10 @@ abstract public class AbstractLogHandler
     String message = format.format(record);
     try {
       StringBuffer components = new StringBuffer("\r\nRegistered Components:");
-      Iterator iter = com.ceridwen.util.versioning.ComponentRegistry.
+      Iterator<?> iter = com.ceridwen.util.versioning.ComponentRegistry.
           listRegisteredComponents();
       while (iter.hasNext()) {
-        Class component = (Class) iter.next();
+        Class<?> component = (Class<?>) iter.next();
         components.append("\r\n" +
                           com.ceridwen.util.versioning.ComponentRegistry.
                           getName(component) +
@@ -50,7 +50,7 @@ abstract public class AbstractLogHandler
 
       StringBuffer environment = new StringBuffer("\r\nEnvironment:");
       Properties props = System.getProperties();
-      Enumeration enumerate = props.keys();
+      Enumeration<?> enumerate = props.keys();
       while (enumerate.hasMoreElements()) {
         String key = (String) enumerate.nextElement();
         environment.append("\r\n" + key + "=" + props.getProperty(key));

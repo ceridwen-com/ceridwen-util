@@ -34,10 +34,10 @@ private JPanel jPanel1 = new JPanel();
   private JLabel AppVersionField = new JLabel();
   private JLabel AppNameField = new JLabel();
   private JTable ComponentsTable = new JTable();
-  private Class app;
+  private Class<?> app;
   private GridLayout gridLayout1 = new GridLayout();
 
-  public AboutDialog(Frame frame, boolean modal, Class app) throws HeadlessException {
+  public AboutDialog(Frame frame, boolean modal, Class<?> app) throws HeadlessException {
     super(frame,modal);
     try {
       this.app = app;
@@ -82,9 +82,9 @@ private JPanel jPanel1 = new JPanel();
       table.addColumn("Component");
       table.addColumn("Version");
       table.addColumn("Author");
-      Iterator iterate = ComponentRegistry.listRegisteredComponents();
+      Iterator<?> iterate = ComponentRegistry.listRegisteredComponents();
       while (iterate.hasNext()) {
-        Class component = (Class) iterate.next();
+        Class<?> component = (Class<?>) iterate.next();
         if (component != app) {
           table.addRow(new String[] {ComponentRegistry.getName(component),
                        ComponentRegistry.getVersionString(component),
