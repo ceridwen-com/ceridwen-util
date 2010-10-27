@@ -18,6 +18,7 @@ lib/commons-net-2.0/NOTICE.txt -text svneol=unset#text/plain
 lib/commons-net-2.0/README -text
 lib/commons-net-2.0/commons-net-2.0.jar -text
 lib/commons-net-2.0/commons-net-ftp-2.0.jar -text
+/license.txt -text svneol=unset#text/plain
 /package-jar.xml -text svneol=unset#text/plain
 src/com/ceridwen/util/PersistentQueue.java -text
 src/com/ceridwen/util/Queue.java -text
