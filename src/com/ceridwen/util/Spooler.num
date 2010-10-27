@@ -1,8 +1,8 @@
 #Build Number: src/com/ceridwen/util/Spooler.num
-#Wed Oct 27 01:21:59 BST 2010
+#Wed Oct 27 01:27:19 BST 2010
 version=1.0
+date=Wed Oct 27 01\:27\:19 BST 2010
 name=Ceridwen Utils\: Spoolers
-date=Wed Oct 27 01\:21\:59 BST 2010
 author=Matthew J. Dovey
 epoch=1137168265890
-build=211
+build=212
