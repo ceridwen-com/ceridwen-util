@@ -159,7 +159,7 @@ public class PersistentQueue implements Queue {
       }
     }
 
-    , 10000);
+    , 10000, 10000);
 
     q.add("20");
     q.add("19");

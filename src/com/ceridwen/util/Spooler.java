@@ -40,14 +40,14 @@ public class Spooler extends TimerTask implements Queue {
   private Timer scheduler;
   private SpoolerProcessor processor;
 
-  public Spooler(Queue queue, SpoolerProcessor processor, long period) {
+  public Spooler(Queue queue, SpoolerProcessor processor, long delay, long period) {
     this.queue = queue;
     this.processor = processor;
     scheduler = new Timer();
     if (period < 1) {
       period = 600000;
     }
-    scheduler.schedule(this, period, period);
+    scheduler.schedule(this, delay, period);
   }
 
   public void cancelScheduler() {
