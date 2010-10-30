@@ -1,8 +1,8 @@
 #Build Number: src/com/ceridwen/util/versioning/AboutDialog.num
-#Sat Oct 30 00:15:16 BST 2010
+#Sun Oct 31 00:40:34 BST 2010
 version=1.10
+date=Sun Oct 31 00\:40\:34 BST 2010
 name=Ceridwen Utils\: About Dialog
-date=Sat Oct 30 00\:15\:16 BST 2010
 author=Matthew J. Dovey
 epoch=1137168265890
-build=288
+build=291
