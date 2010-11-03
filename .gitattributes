@@ -37,4 +37,3 @@ src/com/ceridwen/util/net/TimeoutSocketFactory.java -text
 src/com/ceridwen/util/versioning/AboutDialog.java -text
 src/com/ceridwen/util/versioning/AboutDialog.num -text
 src/com/ceridwen/util/versioning/ComponentRegistry.java -text
-src/com/ceridwen/util/versioning/ComponentRegistry.num -text
