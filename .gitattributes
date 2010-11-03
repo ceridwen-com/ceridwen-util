@@ -6,6 +6,7 @@
 .externalToolBuilders/Build[!!-~]Number[!!-~]-[!!-~]Spooler.launch -text
 .externalToolBuilders/Package[!!-~]Utilities[!!-~]Jar.launch -text svneol=unset#text/plain
 /.project -text
+/build.xml -text svneol=unset#text/plain
 /buildnum.xml -text
 lib/commons-logging-1.1.1/LICENSE.txt -text svneol=unset#text/plain
 lib/commons-logging-1.1.1/NOTICE.txt -text svneol=unset#text/plain
