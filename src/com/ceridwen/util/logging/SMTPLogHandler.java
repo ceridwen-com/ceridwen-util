@@ -44,9 +44,9 @@ public class SMTPLogHandler extends AbstractLogHandler {
     private MailerDaemon daemon;
     private String recipient;
 
-    public SMTPLogHandler(String host, String recipient) {
+    public SMTPLogHandler(String host, String recipient, String sender) {
         this.recipient = recipient;
-        this.daemon = new MailerDaemon(host, "logger@ceridwen.com");
+        this.daemon = new MailerDaemon(host, sender);
         this.daemon.start();
     }
 
