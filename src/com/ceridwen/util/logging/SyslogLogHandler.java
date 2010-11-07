@@ -131,7 +131,7 @@ public class SyslogLogHandler
         try {
             byte[] buffer = src.getBytes("ISO-8859-1");
 
-            for (int i = 0; (i < (srcEnd - srcBegin) + 1) && (i < (buffer.length - dstBegin) + 1); i++) {
+            for (int i = 0; (i < (srcEnd - srcBegin)) && (i < (dst.length - dstBegin)); i++) {
                 dst[dstBegin + i] = buffer[srcBegin + i];
             }
         } catch (Exception ex) {
