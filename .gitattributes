@@ -36,6 +36,7 @@ src/com/ceridwen/util/logging/SMTPLogHandler.java -text
 src/com/ceridwen/util/logging/SMTPLogHandler.num -text
 src/com/ceridwen/util/logging/SyslogLogHandler.java -text
 src/com/ceridwen/util/management/notification/ThreadedNotificationBroadcasterSupport.java -text
+src/com/ceridwen/util/net/Syslog.java -text svneol=unset#text/plain
 src/com/ceridwen/util/net/TimeoutSocketFactory.java -text
 src/com/ceridwen/util/versioning/AboutDialog.java -text
 src/com/ceridwen/util/versioning/AboutDialog.num -text
