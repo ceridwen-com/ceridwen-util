@@ -35,8 +35,6 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.net.SocketException;
-import java.net.UnknownHostException;
 
 public class Syslog {
     // Priorities.
@@ -97,7 +95,7 @@ public class Syslog {
         }
     }
 
-    public static void sendSyslog(String host, int port, String ident, int priority, String msg) {
+    public static void sendSyslog(String host, int port, String ident, int priority, String msg) throws IOException {
         int pricode;
         int length;
         int idx;
@@ -107,20 +105,8 @@ public class Syslog {
         DatagramPacket packet;
         DatagramSocket socket;
         java.net.InetAddress address;
-        try {
-            address = InetAddress.getByName(host);
-        } catch (UnknownHostException e) {
-            System.err.println(
-                    "error locating localhost: " + e.getMessage());
-            return;
-        }
-        try {
-            socket = new DatagramSocket();
-        } catch (SocketException e) {
-            System.err.println(
-                    "error creating syslog udp socket: " + e.getMessage());
-            return;
-        }
+        address = InetAddress.getByName(host);
+        socket = new DatagramSocket();
 
         pricode = Syslog.MakePriorityCode(Syslog.facility, priority);
         Integer priObj = new Integer(pricode);
@@ -152,13 +138,8 @@ public class Syslog {
 
         packet = new DatagramPacket(data, length, address, port);
 
-        try {
-            socket.send(packet);
-        } catch (IOException e) {
-            System.err.println(
-                    "error sending message: '" + e.getMessage() + "'");
-        }
-
+        socket.send(packet);
+        
         packet = null;
         socket.close();
         socket = null;

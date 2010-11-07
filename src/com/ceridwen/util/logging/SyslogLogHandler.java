@@ -19,6 +19,8 @@
 
 package com.ceridwen.util.logging;
 
+import java.io.IOException;
+
 import com.ceridwen.util.net.Syslog;
 
 public class SyslogLogHandler
@@ -34,7 +36,11 @@ public class SyslogLogHandler
 
     @Override
     public void sendMessage(String logger, String level, String message) {
-        Syslog.sendSyslog(host, port, logger, Syslog.LOG_ALERT, message);
+        try {
+            Syslog.sendSyslog(host, port, logger, Syslog.LOG_ALERT, message);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
