@@ -50,7 +50,6 @@
 // Visit the ACME Labs Java page for up-to-date versions of this and other
 // fine Java utilities: http://www.acme.com/java/
 
-
 package com.ceridwen.util.logging;
 
 import java.io.IOException;
@@ -61,189 +60,191 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 
 public class SyslogLogHandler
-    extends AbstractLogHandler {
-  // Priorities.
-  public static final int LOG_EMERG = 0; // system is unusable
-  public static final int LOG_ALERT = 1; // action must be taken immediately
-  public static final int LOG_CRIT = 2; // critical conditions
-  public static final int LOG_ERR = 3; // error conditions
-  public static final int LOG_WARNING = 4; // warning conditions
-  public static final int LOG_NOTICE = 5; // normal but significant condition
-  public static final int LOG_INFO = 6; // informational
-  public static final int LOG_DEBUG = 7; // debug-level messages
-  public static final int LOG_PRIMASK = 0x0007; // mask to extract priority
+        extends AbstractLogHandler {
+    // Priorities.
+    public static final int LOG_EMERG = 0; // system is unusable
+    public static final int LOG_ALERT = 1; // action must be taken immediately
+    public static final int LOG_CRIT = 2; // critical conditions
+    public static final int LOG_ERR = 3; // error conditions
+    public static final int LOG_WARNING = 4; // warning conditions
+    public static final int LOG_NOTICE = 5; // normal but significant condition
+    public static final int LOG_INFO = 6; // informational
+    public static final int LOG_DEBUG = 7; // debug-level messages
+    public static final int LOG_PRIMASK = 0x0007; // mask to extract priority
 
-  // Facilities.
-  public static final int LOG_KERN = (0<<3); // kernel messages
-  public static final int LOG_USER = (1<<3); // random user-level messages
-  public static final int LOG_MAIL = (2<<3); // mail system
-  public static final int LOG_DAEMON = (3<<3); // system daemons
-  public static final int LOG_AUTH = (4<<3); // security/authorization
-  public static final int LOG_SYSLOG = (5<<3); // internal syslogd use
-  public static final int LOG_LPR = (6<<3); // line printer subsystem
-  public static final int LOG_NEWS = (7<<3); // network news subsystem
-  public static final int LOG_UUCP = (8<<3); // UUCP subsystem
-  public static final int LOG_CRON = (15<<3); // clock daemon
-  // Other codes through 15 reserved for system use.
-  public static final int LOG_LOCAL0 = (16<<3); // reserved for local use
-  public static final int LOG_LOCAL1 = (17<<3); // reserved for local use
-  public static final int LOG_LOCAL2 = (18<<3); // reserved for local use
-  public static final int LOG_LOCAL3 = (19<<3); // reserved for local use
-  public static final int LOG_LOCAL4 = (20<<3); // reserved for local use
-  public static final int LOG_LOCAL5 = (21<<3); // reserved for local use
-  public static final int LOG_LOCAL6 = (22<<3); // reserved for local use
-  public static final int LOG_LOCAL7 = (23<<3); // reserved for local use
+    // Facilities.
+    public static final int LOG_KERN = (0 << 3); // kernel messages
+    public static final int LOG_USER = (1 << 3); // random user-level messages
+    public static final int LOG_MAIL = (2 << 3); // mail system
+    public static final int LOG_DAEMON = (3 << 3); // system daemons
+    public static final int LOG_AUTH = (4 << 3); // security/authorization
+    public static final int LOG_SYSLOG = (5 << 3); // internal syslogd use
+    public static final int LOG_LPR = (6 << 3); // line printer subsystem
+    public static final int LOG_NEWS = (7 << 3); // network news subsystem
+    public static final int LOG_UUCP = (8 << 3); // UUCP subsystem
+    public static final int LOG_CRON = (15 << 3); // clock daemon
+    // Other codes through 15 reserved for system use.
+    public static final int LOG_LOCAL0 = (16 << 3); // reserved for local use
+    public static final int LOG_LOCAL1 = (17 << 3); // reserved for local use
+    public static final int LOG_LOCAL2 = (18 << 3); // reserved for local use
+    public static final int LOG_LOCAL3 = (19 << 3); // reserved for local use
+    public static final int LOG_LOCAL4 = (20 << 3); // reserved for local use
+    public static final int LOG_LOCAL5 = (21 << 3); // reserved for local use
+    public static final int LOG_LOCAL6 = (22 << 3); // reserved for local use
+    public static final int LOG_LOCAL7 = (23 << 3); // reserved for local use
 
-  public static final int LOG_FACMASK = 0x03F8; // mask to extract facility
+    public static final int LOG_FACMASK = 0x03F8; // mask to extract facility
 
-  // Option flags.
-  public static final int LOG_PID = 0x01; // log the pid with each message
-  public static final int LOG_CONS = 0x02; // log on the console if errors
-  public static final int LOG_NDELAY = 0x08; // don't delay open
-  public static final int LOG_NOWAIT = 0x10; // don't wait for console forks
+    // Option flags.
+    public static final int LOG_PID = 0x01; // log the pid with each message
+    public static final int LOG_CONS = 0x02; // log on the console if errors
+    public static final int LOG_NDELAY = 0x08; // don't delay open
+    public static final int LOG_NOWAIT = 0x10; // don't wait for console forks
 
-//  private final int logopt = LOG_CONS | LOG_NDELAY | LOG_NOWAIT;
-  private final int facility = LOG_LOCAL0;
+    // private final int logopt = LOG_CONS | LOG_NDELAY | LOG_NOWAIT;
+    private final int facility = SyslogLogHandler.LOG_LOCAL0;
 
-  private int port = 514;
-  private String host;
+    private int port = 514;
+    private String host;
 
+    // / Creating a Syslog instance is equivalent of the Unix openlog() call.
+    // @exception SyslogException if there was a problem
+    public SyslogLogHandler(String host, int port) {
+        this.host = host;
+        this.port = port;
+    }
 
-  /// Creating a Syslog instance is equivalent of the Unix openlog() call.
-  // @exception SyslogException if there was a problem
-  public SyslogLogHandler(String host, int port) {
-    this.host = host;
-    this.port = port;
-  }
+    // / Use this method to log your syslog messages. The facility and
+    // level are the same as their Unix counterparts, and the Syslog
+    // class provides constants for these fields. The msg is what is
+    // actually logged.
+    // @exception SyslogException if there was a problem
+    @Override
+    public void sendMessage(String logger, String level, String message) {
+        this.sendMessage(logger, SyslogLogHandler.LOG_ALERT, message);
+    }
 
-  /// Use this method to log your syslog messages. The facility and
-  // level are the same as their Unix counterparts, and the Syslog
-  // class provides constants for these fields. The msg is what is
-  // actually logged.
-  // @exception SyslogException if there was a problem
-  public void sendMessage(String logger, String level, String message) {
-    sendMessage(logger, LOG_ALERT, message);
-  }
-
-  public void getBytes(String src, int srcBegin,
+    public void getBytes(String src, int srcBegin,
                        int srcEnd,
                        byte[] dst,
                        int dstBegin) {
-    try {
-      byte[] buffer = src.getBytes("ISO-8859-1");
+        try {
+            byte[] buffer = src.getBytes("ISO-8859-1");
 
-      for (int i = 0; (i < (srcEnd - srcBegin) + 1) && (i < (buffer.length - dstBegin) + 1); i++) {
-        dst[dstBegin + i] = buffer[srcBegin + i];
-      }
-    } catch (Exception ex) {
-      ex.printStackTrace(System.err);
-    }
-  }
-
-
-  public void sendMessage(String ident, int priority, String msg) {
-    int pricode;
-    int length;
-    int idx;
-    byte[] data;
-    String strObj;
-
-    DatagramPacket packet;
-    DatagramSocket socket;
-    java.net.InetAddress address;
-    try {
-      address = InetAddress.getByName(this.host);
-    }
-    catch (UnknownHostException e) {
-      System.err.println(
-          "error locating localhost: " + e.getMessage());
-      return;
-    }
-    try {
-      socket = new DatagramSocket();
-    }
-    catch (SocketException e) {
-      System.err.println(
-          "error creating syslog udp socket: " + e.getMessage());
-      return;
+            for (int i = 0; (i < (srcEnd - srcBegin) + 1) && (i < (buffer.length - dstBegin) + 1); i++) {
+                dst[dstBegin + i] = buffer[srcBegin + i];
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace(System.err);
+        }
     }
 
-    pricode = MakePriorityCode(facility, priority);
-    Integer priObj = new Integer(pricode);
+    public void sendMessage(String ident, int priority, String msg) {
+        int pricode;
+        int length;
+        int idx;
+        byte[] data;
+        String strObj;
 
-    length = 4 + ident.length() + msg.length() + 1;
-    length += (pricode > 99) ? 3 : ( (pricode > 9) ? 2 : 1);
+        DatagramPacket packet;
+        DatagramSocket socket;
+        java.net.InetAddress address;
+        try {
+            address = InetAddress.getByName(this.host);
+        } catch (UnknownHostException e) {
+            System.err.println(
+                    "error locating localhost: " + e.getMessage());
+            return;
+        }
+        try {
+            socket = new DatagramSocket();
+        } catch (SocketException e) {
+            System.err.println(
+                    "error creating syslog udp socket: " + e.getMessage());
+            return;
+        }
 
-    data = new byte[length];
+        pricode = this.MakePriorityCode(this.facility, priority);
+        Integer priObj = new Integer(pricode);
 
-    idx = 0;
-    data[idx++] = (byte) '<';
+        length = 4 + ident.length() + msg.length() + 1;
+        length += (pricode > 99) ? 3 : ((pricode > 9) ? 2 : 1);
 
-    strObj = Integer.toString(priObj.intValue());
-    getBytes(strObj, 0, strObj.length(), data, idx);
-    idx += strObj.length();
+        data = new byte[length];
 
-    data[idx++] = (byte) '>';
+        idx = 0;
+        data[idx++] = (byte) '<';
 
-    getBytes(ident, 0, ident.length(), data, idx);
-    idx += ident.length();
+        strObj = Integer.toString(priObj.intValue());
+        this.getBytes(strObj, 0, strObj.length(), data, idx);
+        idx += strObj.length();
 
-    data[idx++] = (byte) ':';
-    data[idx++] = (byte) ' ';
+        data[idx++] = (byte) '>';
 
-    getBytes(msg, 0, msg.length(), data, idx);
-    idx += msg.length();
+        this.getBytes(ident, 0, ident.length(), data, idx);
+        idx += ident.length();
 
-    data[idx] = 0;
+        data[idx++] = (byte) ':';
+        data[idx++] = (byte) ' ';
 
-    packet = new DatagramPacket(data, length, address, this.port);
+        this.getBytes(msg, 0, msg.length(), data, idx);
+        idx += msg.length();
 
-    try {
-      socket.send(packet);
+        data[idx] = 0;
+
+        packet = new DatagramPacket(data, length, address, this.port);
+
+        try {
+            socket.send(packet);
+        } catch (IOException e) {
+            System.err.println(
+                    "error sending message: '" + e.getMessage() + "'");
+        }
+
+        packet = null;
+        socket.close();
+        socket = null;
+        address = null;
     }
-    catch (IOException e) {
-      System.err.println(
-          "error sending message: '" + e.getMessage() + "'");
+
+    private int MakePriorityCode(int facility, int priority) {
+        return ((facility & SyslogLogHandler.LOG_FACMASK) | priority);
     }
 
-    packet = null;
-    socket.close();
-    socket = null;
-    address = null;
-  }
+    /**
+     * Close the <tt>Handler</tt> and free all associated resources.
+     * 
+     * @throws SecurityException
+     *             if a security manager exists and if the caller does not have
+     *             <tt>LoggingPermission("control")</tt>.
+     */
+    @Override
+    public void close() throws SecurityException {
+    }
 
-  private int MakePriorityCode(int facility, int priority) {
-    return ( (facility & LOG_FACMASK) | priority);
-  }
+    /**
+     * Flush any buffered output.
+     * 
+     */
+    @Override
+    public void flush() {
+    }
 
-  /**
-   * Close the <tt>Handler</tt> and free all associated resources.
-   *
-   * @throws SecurityException if a security manager exists and if the caller
-   *   does not have <tt>LoggingPermission("control")</tt>.
-   */
-  public void close() throws SecurityException {
-  }
+    /**
+     * sendMessage
+     * 
+     * @param logger
+     *            String
+     * @param level
+     *            int
+     * @param message
+     *            String
+     */
 
-  /**
-   * Flush any buffered output.
-   *
-   */
-  public void flush() {
-  }
+    public static void main(String args[]) {
+        SyslogLogHandler test = new SyslogLogHandler("host.ceridwen.com", 514);
+        test.sendMessage("test", 0, "test");
 
-  /**
-   * sendMessage
-   *
-   * @param logger String
-   * @param level int
-   * @param message String
-   */
-
-  public static void main(String args[]) {
-    SyslogLogHandler test = new SyslogLogHandler("host.ceridwen.com", 514);
-    test.sendMessage("test", 0, "test");
-
-  }
+    }
 
 }

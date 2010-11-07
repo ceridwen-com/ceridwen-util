@@ -9,6 +9,7 @@
 .settings/org.eclipse.core.resources.prefs -text svneol=unset#text/plain
 /build.xml -text svneol=unset#text/plain
 /buildnum.xml -text
+/changelog.txt -text svneol=unset#text/plain
 lib/commons-logging-1.1.1/LICENSE.txt -text svneol=unset#text/plain
 lib/commons-logging-1.1.1/NOTICE.txt -text svneol=unset#text/plain
 lib/commons-logging-1.1.1/RELEASE-NOTES.txt -text svneol=unset#text/plain

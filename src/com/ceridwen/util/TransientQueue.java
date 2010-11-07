@@ -30,27 +30,38 @@ package com.ceridwen.util;
 import java.util.Vector;
 
 public class TransientQueue implements Queue {
-  private Vector<Object> items;
-  public TransientQueue() {
-    items = new Vector<Object>();
-  }
-  public void add(Object o) {
-    items.add(o);
-  }
-  public Object remove() {
-    if (items.isEmpty()) {
-      return null;
-    } else {
-      return items.remove(0);
+    private Vector<Object> items;
+
+    public TransientQueue() {
+        this.items = new Vector<Object>();
     }
-  }
-  public Object peek(int n) {
-    return items.get(n);
-  }
-  public boolean isEmpty() {
-    return items.isEmpty();
-  }
-  public int size() {
-    return items.size();
-  }
+
+    @Override
+    public void add(Object o) {
+        this.items.add(o);
+    }
+
+    @Override
+    public Object remove() {
+        if (this.items.isEmpty()) {
+            return null;
+        } else {
+            return this.items.remove(0);
+        }
+    }
+
+    @Override
+    public Object peek(int n) {
+        return this.items.get(n);
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return this.items.isEmpty();
+    }
+
+    @Override
+    public int size() {
+        return this.items.size();
+    }
 }

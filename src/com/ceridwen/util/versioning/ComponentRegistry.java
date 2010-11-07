@@ -33,70 +33,76 @@ import java.util.Iterator;
 import java.util.Properties;
 
 public class ComponentRegistry {
-  private static Hashtable<Class<?>, Properties> components = new Hashtable<Class<?>, Properties>();
+    private static Hashtable<Class<?>, Properties> components = new Hashtable<Class<?>, Properties>();
 
-  public static void registerComponent(Class<?> component) {
-    InputStream in = null;
-    try {
-      String[] bits = component.getName().split("\\.");
-      in = component.getResourceAsStream(bits[bits.length-1] + ".num");
-      Properties props = new Properties();
-      props.load(in);
-      in.close();
-      components.put(component, props);
-    } catch (Exception ex) {
+    public static void registerComponent(Class<?> component) {
+        InputStream in = null;
+        try {
+            String[] bits = component.getName().split("\\.");
+            in = component.getResourceAsStream(bits[bits.length - 1] + ".num");
+            Properties props = new Properties();
+            props.load(in);
+            in.close();
+            ComponentRegistry.components.put(component, props);
+        } catch (Exception ex) {
+        }
     }
-  }
 
-  public static Iterator<Class<?>> listRegisteredComponents() {
-    ComponentRegistry.registerComponent(ComponentRegistry.class);
-    return components.keySet().iterator();
-  }
-  public static String getVersionString(Class<?> component) {
-    return "Version " + getVersion(component) + " (Built: " + getBuildDate(component) + ")";
-  }
-  public static String getVersion(Class<?> component) {
-    Properties props = (Properties)components.get(component);
-    if (props == null) {
-      return null;
+    public static Iterator<Class<?>> listRegisteredComponents() {
+        ComponentRegistry.registerComponent(ComponentRegistry.class);
+        return ComponentRegistry.components.keySet().iterator();
     }
-    return props.getProperty("version","") + "." + Long.toString(getBuild(component));
-  }
-  public static long getBuild(Class<?> component) {
-    Properties props = (Properties)components.get(component);
-    if (props == null) {
-      return 0;
-    }
-    return Long.parseLong(props.getProperty("build","0"));
-  }
-  public static String getBuildDate(Class<?> component) {
-    Properties props = (Properties)components.get(component);
-    if (props == null) {
-      return null;
-    }
-    return props.getProperty("date","");
-  }
-  public static long getEpoch(Class<?> component) {
-    Properties props = (Properties)components.get(component);
-    if (props == null) {
-      return 0;
-    }
-    return Long.parseLong(props.getProperty("epoch","0"));
-  }
-  public static String getAuthor(Class<?> component) {
-    Properties props = (Properties)components.get(component);
-    if (props == null) {
-      return null;
-    }
-    return props.getProperty("author","");
-  }
-  public static String getName(Class<?> component) {
-    Properties props = (Properties)components.get(component);
-    if (props == null) {
-      return null;
-    }
-    return props.getProperty("name","");
-  }
 
+    public static String getVersionString(Class<?> component) {
+        return "Version " + ComponentRegistry.getVersion(component) + " (Built: " + ComponentRegistry.getBuildDate(component) + ")";
+    }
+
+    public static String getVersion(Class<?> component) {
+        Properties props = ComponentRegistry.components.get(component);
+        if (props == null) {
+            return null;
+        }
+        return props.getProperty("version", "") + "." + Long.toString(ComponentRegistry.getBuild(component));
+    }
+
+    public static long getBuild(Class<?> component) {
+        Properties props = ComponentRegistry.components.get(component);
+        if (props == null) {
+            return 0;
+        }
+        return Long.parseLong(props.getProperty("build", "0"));
+    }
+
+    public static String getBuildDate(Class<?> component) {
+        Properties props = ComponentRegistry.components.get(component);
+        if (props == null) {
+            return null;
+        }
+        return props.getProperty("date", "");
+    }
+
+    public static long getEpoch(Class<?> component) {
+        Properties props = ComponentRegistry.components.get(component);
+        if (props == null) {
+            return 0;
+        }
+        return Long.parseLong(props.getProperty("epoch", "0"));
+    }
+
+    public static String getAuthor(Class<?> component) {
+        Properties props = ComponentRegistry.components.get(component);
+        if (props == null) {
+            return null;
+        }
+        return props.getProperty("author", "");
+    }
+
+    public static String getName(Class<?> component) {
+        Properties props = ComponentRegistry.components.get(component);
+        if (props == null) {
+            return null;
+        }
+        return props.getProperty("name", "");
+    }
 
 }
