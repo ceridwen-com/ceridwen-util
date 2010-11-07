@@ -1,4 +1,5 @@
 Version 1.30:
+Syslog extracted to dedicated class
 Bugfix: Syslog messages would be truncated
 Bugfix: removed hardcoded from address in SMTPLogHandler
 
