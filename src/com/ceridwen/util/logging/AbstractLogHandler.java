@@ -18,9 +18,11 @@
  ******************************************************************************/
 package com.ceridwen.util.logging;
 
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.Properties;
+import java.util.Stack;
 import java.util.logging.Formatter;
 import java.util.logging.Handler;
 import java.util.logging.LogRecord;
@@ -28,9 +30,44 @@ import java.util.logging.XMLFormatter;
 
 abstract public class AbstractLogHandler
         extends Handler {
+    
+    int throttle;
+    int duration;
+    Stack<Date> timeStack = new Stack<Date>();
+    
     protected AbstractLogHandler() {
         super();
     }
+    
+    public void setThrottle(int throttle, int duration) {
+        this.throttle = throttle;
+        this.duration = duration;
+    }
+
+    private boolean isThrottled()
+    {
+        if (this.throttle == 0 || this.duration == 0) {
+            return false;
+        }
+        Stack<Date> newStack = new Stack<Date>();
+        Date now = new Date();
+        long count = 0;
+        while (!timeStack.empty()) {
+            Date dt = timeStack.pop();
+            if (now.getTime() - dt.getTime() <= duration * 1000) {
+                newStack.push(dt);
+                count++;
+            }
+        }        
+        timeStack = newStack;
+        if (count > this.throttle) {
+            return true;
+        } else {
+            timeStack.push(new Date());
+            return false;
+        }
+    }
+    
 
     abstract protected void sendMessage(String logger, String level, String message);
 
@@ -43,6 +80,9 @@ abstract public class AbstractLogHandler
     @Override
     public void publish(LogRecord record) {
         if (!this.isLoggable(record)) {
+            return;
+        }
+        if (this.isThrottled()) {
             return;
         }
 
