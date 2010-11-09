@@ -1,5 +1,6 @@
 Version 1.30:
 Syslog extracted to dedicated class
+Added throttle to AbstractLogHandler
 Bugfix: Syslog messages would be truncated
 Bugfix: removed hardcoded from address in SMTPLogHandler
 
