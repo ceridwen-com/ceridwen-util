@@ -1,4 +1,5 @@
 Version 1.30:
+Added REST LogHandler
 Syslog extracted to dedicated class
 Added throttle to AbstractLogHandler
 Bugfix: Syslog messages would be truncated
