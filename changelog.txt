@@ -1,4 +1,4 @@
-Version 1.30:
+Version 1.30: 13/11/2010 (336)
 Added REST LogHandler
 Syslog extracted to dedicated class
 Added throttle to AbstractLogHandler
