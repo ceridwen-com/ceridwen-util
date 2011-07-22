@@ -10,6 +10,11 @@
 /build.xml -text svneol=unset#text/plain
 /buildnum.xml -text
 /changelog.txt -text svneol=unset#text/plain
+lib/commons-lang3-3.0/LICENSE.txt -text svneol=unset#text/plain
+lib/commons-lang3-3.0/NOTICE.txt -text svneol=unset#text/plain
+lib/commons-lang3-3.0/RELEASE-NOTES.txt -text svneol=unset#text/plain
+lib/commons-lang3-3.0/commons-lang3-3.0-tests.jar -text
+lib/commons-lang3-3.0/commons-lang3-3.0.jar -text
 lib/commons-logging-1.1.1/LICENSE.txt -text svneol=unset#text/plain
 lib/commons-logging-1.1.1/NOTICE.txt -text svneol=unset#text/plain
 lib/commons-logging-1.1.1/RELEASE-NOTES.txt -text svneol=unset#text/plain

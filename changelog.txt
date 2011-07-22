@@ -1,3 +1,6 @@
+Version 1.40: 
+Refactored to use StringUtils.isEmpty
+
 Version 1.30: 13/11/2010 (336)
 Added REST LogHandler
 Syslog extracted to dedicated class

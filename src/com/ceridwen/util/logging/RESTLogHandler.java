@@ -6,6 +6,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLConnection;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class RESTLogHandler extends AbstractLogHandler {
     private String baseUrl;
     
@@ -16,7 +18,7 @@ public class RESTLogHandler extends AbstractLogHandler {
     public synchronized void sendRest(String logger, String level, String message) { 
         StringBuffer restString = new StringBuffer();
         boolean first = true;
-        if (!((logger==null)?"":logger).isEmpty()) {
+        if (StringUtils.isNotEmpty(logger)) {
             if (!first) {
                 restString.append("&");
             }
@@ -24,7 +26,7 @@ public class RESTLogHandler extends AbstractLogHandler {
             restString.append("logger=");
             restString.append(logger);
         }
-        if (!((level==null)?"":level).isEmpty()) {
+        if (StringUtils.isNotEmpty(level)) {
             if (!first) {
                 restString.append("&");
             }
@@ -32,7 +34,7 @@ public class RESTLogHandler extends AbstractLogHandler {
             restString.append("level=");
             restString.append(level);
         }
-        if (!((message==null)?"":message).isEmpty()) {
+        if (StringUtils.isNotEmpty(message)) {
             if (!first) {
                 restString.append("&");
             }
@@ -47,7 +49,7 @@ public class RESTLogHandler extends AbstractLogHandler {
             // Send data
             String urlStr = this.baseUrl;
             String params = restString.toString();
-            if  (params.length() > 0) {
+            if  (StringUtils.isNotEmpty(params)) {
                  urlStr += "?" + params;
             }
             URL url = new URL(urlStr);
