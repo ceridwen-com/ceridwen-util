@@ -1,21 +1,44 @@
 <?xml version="1.0"?>
 
 <project default="main" basedir=".">
-  <target name="main" >
-  	<available file="${numfile}" property="numfileexists" />
-  	<fail>
-  	  <condition>
-  	    <isfalse value="${numfileexists}" />
-      </condition>
-  	</fail>
- 	<propertyfile file="${numfile}" comment="Build Number: ${numfile}">
- 	  <entry  key="version" operation="=" default="1.00"/>
- 	  <entry  key="name" operation="=" default=""/>
- 	  <entry  key="date" type="date" pattern="EEE MMM dd HH:mm:ss zzz yyyy" value="now"/>
- 	  <entry  key="author" operation="=" default=""/>
- 	  <entry  key="build" type="int" pattern="0" operation="+" default="1"/>
- 	</propertyfile>
-  </target>
+	<target name="base" >
+		<available file="${numfile}" property="numfileexists" />
+		<fail message="${numfile} does not exist">
+			<condition>
+				<isfalse value="${numfileexists}" />
+			</condition>
+		</fail>
+		<propertyfile file="${numfile}" comment="Build Number: ${numfile}">
+			<entry  key="version" operation="=" default="1.00"/>
+			<entry  key="name" operation="=" default=""/>
+			<entry  key="date" type="date" pattern="EEE MMM dd HH:mm:ss zzz yyyy" value="now"/>
+			<entry  key="author" operation="=" default=""/>
+			<entry key="build.count" type="int" pattern="0" operation="+" default="1"/>
+			</propertyfile>
+		<property file="${numfile}"/>
+		<condition property="hudson">
+			<and>
+				<isset property="env.SVN_REVISION"/>
+				<isset property="env.BUILD_NUMBER"/>
+			</and>
+		</condition>
+	</target>
+
+	<target name="build-count" depends="base" if="${hudson}">
+		<propertyfile file="${numfile}" comment="Build Number: ${numfile}">
+			<entry key="build" operation="=" value="${env.SVN_REVISION}.${env.BUILD_NUMBER}"/>
+		</propertyfile>
+	</target>
+
+	<target name="build-stamp" depends="base" unless="${hudson}">
+		<property file="${numfile}"/>
+		<propertyfile file="${numfile}" comment="Build Number: ${numfile}">
+			<entry key="build" operation="=" value="${build.count}"/>
+		</propertyfile>
+	</target>
+
+	<target name="main" depends="build-count, build-stamp">
+	</target>
 </project>
 
 

@@ -1,9 +1,11 @@
 #Build Number: src/com/ceridwen/util/versioning/ComponentRegistry.num
-#Mon, 06 Feb 2012 16:12:23 +0000
+#Sat, 10 Mar 2012 15:49:23 +0000
 #Fri Nov 12 18:38:31 GMT 2010
 version=1.40
-date=Mon Feb 06 16\:12\:23 GMT 2012
+date=Sat Mar 10 15\:49\:23 GMT 2012
 name=Ceridwen Utils\: Component Registry
 author=Matthew J. Dovey
 epoch=1137168265890
-build=390
+build.count=393
+build=393
+
