@@ -7,7 +7,6 @@
 <project basedir="." default="build" name="Utilities">
     <property environment="env"/>
     <property name="Circulation.location" value="../Circulation"/>
-    <property name="SelfIssue.location" value="../SelfIssue"/>
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.6"/>
     <property name="source" value="1.6"/>
@@ -46,12 +45,6 @@
     <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects">
         <ant antfile="build.xml" dir="${Circulation.location}" inheritAll="false" target="clean"/>
         <ant antfile="build.xml" dir="${Circulation.location}" inheritAll="false" target="build">
-            <propertyset>
-                <propertyref name="build.compiler"/>
-            </propertyset>
-        </ant>
-        <ant antfile="build.xml" dir="${SelfIssue.location}" inheritAll="false" target="clean"/>
-        <ant antfile="build.xml" dir="${SelfIssue.location}" inheritAll="false" target="build">
             <propertyset>
                 <propertyref name="build.compiler"/>
             </propertyset>
