@@ -8,8 +8,8 @@
 /.project -text
 .settings/org.eclipse.core.resources.prefs -text svneol=unset#text/plain
 /build.xml -text svneol=unset#text/plain
-/buildnum.xml -text
 /changelog.txt -text svneol=unset#text/plain
+/create-jar.xml -text svneol=unset#text/plain
 lib/commons-lang3-3.0/LICENSE.txt -text svneol=unset#text/plain
 lib/commons-lang3-3.0/NOTICE.txt -text svneol=unset#text/plain
 lib/commons-lang3-3.0/RELEASE-NOTES.txt -text svneol=unset#text/plain
@@ -27,7 +27,6 @@ lib/commons-net-2.0/README -text
 lib/commons-net-2.0/commons-net-2.0.jar -text
 lib/commons-net-2.0/commons-net-ftp-2.0.jar -text
 /license.txt -text svneol=unset#text/plain
-/package-jar.xml -text svneol=unset#text/plain
 src/com/ceridwen/util/PersistentQueue.java -text
 src/com/ceridwen/util/Queue.java -text
 src/com/ceridwen/util/Spooler.java -text
@@ -48,3 +47,4 @@ src/com/ceridwen/util/versioning/AboutDialog.java -text
 src/com/ceridwen/util/versioning/AboutDialog.num -text
 src/com/ceridwen/util/versioning/ComponentRegistry.java -text
 src/com/ceridwen/util/versioning/ComponentRegistry.num -text
+/stamp-build.xml -text
