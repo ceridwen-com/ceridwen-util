@@ -1,8 +1,6 @@
 <?xml version="1.0"?>
 
 <project default="main" basedir=".">
-  <property environment="env" />
-  
   <target name="base" >
     <available file="${numfile}" property="numfileexists" />
     <fail message="${numfile} does not exist">
@@ -19,15 +17,15 @@
     </propertyfile>
     <condition property="bamboo">
       <and>
-        <isset property="env.revision"/>
-        <isset property="env.build"/>
+        <isset property="revision"/>
+        <isset property="build"/>
       </and>
     </condition>
   </target>
 
   <target name="build-count" depends="base" if="${bamboo}">
     <propertyfile file="${numfile}" comment="Build Number: ${numfile}">
-      <entry key="build" operation="=" value="${env.revision}.${env.build}"/>
+      <entry key="build" operation="=" value="${revision}.${build}"/>
     </propertyfile>
   </target>
 
