@@ -10,7 +10,7 @@
         		<isfalse value="${build-data-available}" />
       		</condition>
     	</fail>
-    	<propertyfile file="${build-data.properties}" comment="Build Number: ${build-data.properties}">
+    	<propertyfile file="${build-data.properties}" comment="Build Properties: ${build-data.properties}">
       		<entry key="Library-Name" operation="=" default="" />
       		<entry key="Library-Version" operation="=" default="1.00" />
       		<entry key="Library-Vendor" operation="=" default="Matthew J. Dovey" />
@@ -29,7 +29,7 @@
   	</target>
 	
   	<target name="ci-update" depends="update" if="${bamboo}">
-    	<propertyfile file="${numfile}" comment="Build Number: ${numfile}">
+    	<propertyfile file="${build-data.properties}" comment="Build Properties: ${build-data.properties}">
       		<entry key="Library-Build-Stamp" operation="=" value="${bamboo.revision}.${bamboo.build}"/>
     	</propertyfile>
   	</target>
