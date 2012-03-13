@@ -30,7 +30,7 @@
 	
   	<target name="ci-update" depends="update" if="${bamboo}">
     	<propertyfile file="${numfile}" comment="Build Number: ${numfile}">
-      		<entry key="Library-Build-Stamp" operation="=" value="${revision}.${build}"/>
+      		<entry key="Library-Build-Stamp" operation="=" value="${bamboo.revision}.${bamboo.build}"/>
     	</propertyfile>
   	</target>
 	
