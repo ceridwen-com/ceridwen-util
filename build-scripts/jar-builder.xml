@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project>
+  	<import file="stamp-build.xml"/>
+
+  	<target name="clean">
+    	<delete dir="${distrib.dir}"/>
+    	<mkdir dir="${distrib.dir}"/>
+  	</target>
+
+  	<target name="create-jar" depends="clean, stamp-build">
+    	<jar destfile="${distrib.dir}/${jar.base-name}-${implementation-short-version}.jar">
+            <manifest>
+                <attribute name="Implementation-Title" value="${implementation-title}" />
+                <attribute name="Implementation-Version" value="${implementation-version}" />
+                <attribute name="Implementation-Vendor" value="${implementation-vendor}" />
+                <attribute name="Implementation-Vendor-Id" value="${implementation-vendor-id}" />
+                <attribute name="Implementation-URL" value="${implementation-url}" />
+                <attribute name="Implementation-Build-Date" value="${implementation-build-date}" />
+            </manifest>
+            <fileset dir="${classes.dir}" excludes="${excludes}"/>
+        </jar>
+    </target>
+</project>

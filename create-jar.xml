@@ -1,21 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project default="create-jar" name="Create Jar">
-    <property file="src/com/ceridwen/util/versioning/ComponentRegistry.num" />
-  
-  <target name="clean">
-    <delete dir="distrib"/>
-    <mkdir dir="distrib"/>
-  </target>
+<project default="create-jar">
+	<property name="distrib.dir" value="distrib" />
+	<property name="jar.base-name" value="ceridwen-utilities" />
+	<property name="classes.dir" value="bin" />
+	<property name="excludes" value="**.jar" />
 
-  <target name="create-jar" depends="clean">
-    <jar destfile="distrib/ceridwen-utilities-${version}.jar">
-            <manifest>
-                <attribute name="Implementation-Title" value="Ceridwen Utilities Library" />
-                <attribute name="Implementation-Version" value="${version}.${build}" />
-                <attribute name="Implementation-Vendor" value="${author}" />
-            </manifest>
-            <fileset dir="bin" excludes="**.jar"/>
-        </jar>
-    </target>
+	<import file="build-scripts/jar-builder.xml"/>	
 </project>

@@ -1,12 +1,11 @@
 * text=auto !eol
 /.classpath -text
-.externalToolBuilders/Build[!!-~][!!-~]Number[!!-~]-[!!-~]About[!!-~]Dialog.launch -text
-.externalToolBuilders/Build[!!-~]Number[!!-~]-[!!-~]Component[!!-~]Registry.launch -text
-.externalToolBuilders/Build[!!-~]Number[!!-~]-[!!-~]SMTPLogHandler.launch -text
-.externalToolBuilders/Build[!!-~]Number[!!-~]-[!!-~]Spooler.launch -text
-.externalToolBuilders/Package[!!-~]Utilities[!!-~]Jar.launch -text svneol=unset#text/plain
+.externalToolBuilders/Create[!!-~]Jar.launch -text
 /.project -text
 .settings/org.eclipse.core.resources.prefs -text svneol=unset#text/plain
+/build-data.properties -text
+build-scripts/jar-builder.xml -text
+build-scripts/stamp-build.xml -text
 /build.xml -text svneol=unset#text/plain
 /changelog.txt -text svneol=unset#text/plain
 /create-jar.xml -text svneol=unset#text/plain
@@ -47,4 +46,3 @@ src/com/ceridwen/util/versioning/AboutDialog.java -text
 src/com/ceridwen/util/versioning/AboutDialog.num -text
 src/com/ceridwen/util/versioning/ComponentRegistry.java -text
 src/com/ceridwen/util/versioning/ComponentRegistry.num -text
-/stamp-build.xml -text
