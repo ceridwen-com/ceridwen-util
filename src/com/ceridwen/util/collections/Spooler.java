@@ -16,7 +16,7 @@
  * Contributors:
  *     Matthew J. Dovey (www.ceridwen.com) - initial API and implementation
  ******************************************************************************/
-package com.ceridwen.util;
+package com.ceridwen.util.collections;
 
 import java.util.Timer;
 import java.util.TimerTask;

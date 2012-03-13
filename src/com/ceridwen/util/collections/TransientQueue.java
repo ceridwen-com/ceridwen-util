@@ -16,7 +16,7 @@
  * Contributors:
  *     Matthew J. Dovey (www.ceridwen.com) - initial API and implementation
  ******************************************************************************/
-package com.ceridwen.util;
+package com.ceridwen.util.collections;
 
 /**
  * <p>Title: RTSI</p>

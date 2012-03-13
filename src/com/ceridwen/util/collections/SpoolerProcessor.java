@@ -16,7 +16,7 @@
  * Contributors:
  *     Matthew J. Dovey (www.ceridwen.com) - initial API and implementation
  ******************************************************************************/
-package com.ceridwen.util;
+package com.ceridwen.util.collections;
 
 /**
  * <p>Title: RTSI</p> <p>Description: Real Time Self Issue</p> <p>Copyright:
@@ -26,14 +26,6 @@ package com.ceridwen.util;
  * @version 2.0
  */
 
-public interface Queue {
-    void add(Object o);
-
-    Object peek(int n);
-
-    Object remove();
-
-    boolean isEmpty();
-
-    int size();
+public interface SpoolerProcessor {
+    boolean process(Object o);
 }

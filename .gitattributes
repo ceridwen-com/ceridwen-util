@@ -26,12 +26,12 @@ lib/commons-net-2.0/README -text
 lib/commons-net-2.0/commons-net-2.0.jar -text
 lib/commons-net-2.0/commons-net-ftp-2.0.jar -text
 /license.txt -text svneol=unset#text/plain
-src/com/ceridwen/util/PersistentQueue.java -text
-src/com/ceridwen/util/Queue.java -text
-src/com/ceridwen/util/Spooler.java -text
 src/com/ceridwen/util/Spooler.num -text
-src/com/ceridwen/util/SpoolerProcessor.java -text
-src/com/ceridwen/util/TransientQueue.java -text
+src/com/ceridwen/util/collections/PersistentQueue.java -text
+src/com/ceridwen/util/collections/Queue.java -text
+src/com/ceridwen/util/collections/Spooler.java -text
+src/com/ceridwen/util/collections/SpoolerProcessor.java -text
+src/com/ceridwen/util/collections/TransientQueue.java -text
 src/com/ceridwen/util/encryption/TEAAlgorithm.java -text
 src/com/ceridwen/util/logging/AbstractLogHandler.java -text
 src/com/ceridwen/util/logging/JabberLogHandler.java -text
