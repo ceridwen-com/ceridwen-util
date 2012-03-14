@@ -20,13 +20,15 @@ package com.ceridwen.util.logging;
 
 import java.util.Date;
 import java.util.Enumeration;
-import java.util.Iterator;
 import java.util.Properties;
 import java.util.Stack;
 import java.util.logging.Formatter;
 import java.util.logging.Handler;
 import java.util.logging.LogRecord;
 import java.util.logging.XMLFormatter;
+
+import com.ceridwen.util.versioning.LibraryIdentifier;
+import com.ceridwen.util.versioning.LibraryRegistry;
 
 abstract public class AbstractLogHandler
         extends Handler {
@@ -93,19 +95,15 @@ abstract public class AbstractLogHandler
         String message = format.format(record);
         try {
             StringBuffer components = new StringBuffer("\r\nRegistered Components:");
-            Iterator<?> iter = com.ceridwen.util.versioning.ComponentRegistry.
-                    listRegisteredComponents();
-            while (iter.hasNext()) {
-                Class<?> component = (Class<?>) iter.next();
+            LibraryRegistry registry = new LibraryRegistry();
+            for (LibraryIdentifier id: registry.listLibraries()) {
                 components.append("\r\n" +
-                          com.ceridwen.util.versioning.ComponentRegistry.
-                                  getName(component) +
+                          registry.getLibraryName(id) +
                           ". " +
-                          com.ceridwen.util.versioning.ComponentRegistry.
-                                  getVersionString(component) +
+                          registry.getLibraryVersion(id) +
                           " - " +
-                          com.ceridwen.util.versioning.ComponentRegistry.
-                                  getAuthor(component) + ".");
+                          registry.getLibraryVendor(id) +
+                		  ".");
             }
 
             StringBuffer environment = new StringBuffer("\r\nEnvironment:");

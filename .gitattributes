@@ -24,7 +24,6 @@ lib/commons-net-3.1/NOTICE.txt -text
 lib/commons-net-3.1/RELEASE-NOTES.txt -text
 lib/commons-net-3.1/commons-net-3.1.jar -text
 /license.txt -text svneol=unset#text/plain
-src/com/ceridwen/util/Spooler.num -text
 src/com/ceridwen/util/collections/PersistentQueue.java -text
 src/com/ceridwen/util/collections/Queue.java -text
 src/com/ceridwen/util/collections/Spooler.java -text
@@ -35,12 +34,10 @@ src/com/ceridwen/util/logging/AbstractLogHandler.java -text
 src/com/ceridwen/util/logging/JabberLogHandler.java -text
 src/com/ceridwen/util/logging/RESTLogHandler.java -text svneol=unset#text/plain
 src/com/ceridwen/util/logging/SMTPLogHandler.java -text
-src/com/ceridwen/util/logging/SMTPLogHandler.num -text
 src/com/ceridwen/util/logging/SyslogLogHandler.java -text
 src/com/ceridwen/util/management/notification/ThreadedNotificationBroadcasterSupport.java -text
 src/com/ceridwen/util/net/Syslog.java -text svneol=unset#text/plain
 src/com/ceridwen/util/net/TimeoutSocketFactory.java -text
 src/com/ceridwen/util/versioning/AboutDialog.java -text
-src/com/ceridwen/util/versioning/AboutDialog.num -text
-src/com/ceridwen/util/versioning/ComponentRegistry.java -text
-src/com/ceridwen/util/versioning/ComponentRegistry.num -text
+src/com/ceridwen/util/versioning/LibraryIdentifier.java -text
+src/com/ceridwen/util/versioning/LibraryRegistry.java -text

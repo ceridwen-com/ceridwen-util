@@ -23,7 +23,6 @@ import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.HeadlessException;
-import java.util.Iterator;
 
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -51,13 +50,13 @@ public class AboutDialog extends JDialog {
     private JLabel AppVersionField = new JLabel();
     private JLabel AppNameField = new JLabel();
     private JTable ComponentsTable = new JTable();
-    private Class<?> app;
+    private LibraryIdentifier appId;
     private GridLayout gridLayout1 = new GridLayout();
 
-    public AboutDialog(Frame frame, boolean modal, Class<?> app) throws HeadlessException {
+    public AboutDialog(Frame frame, boolean modal, LibraryIdentifier appId) throws HeadlessException {
         super(frame, modal);
         try {
-            this.app = app;
+            this.appId = appId;
             this.jbInit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -65,12 +64,13 @@ public class AboutDialog extends JDialog {
     }
 
     private void jbInit() throws Exception {
-        this.AppAuthorField.setFont(new java.awt.Font("Dialog", 1, 14));
-        this.AppAuthorField.setText(ComponentRegistry.getAuthor(this.app));
+        LibraryRegistry registry = new LibraryRegistry();
+    	this.AppAuthorField.setFont(new java.awt.Font("Dialog", 1, 14));
+        this.AppAuthorField.setText(registry.getLibraryVendor(this.appId));
         this.AppVersionField.setFont(new java.awt.Font("Dialog", 1, 14));
-        this.AppVersionField.setText(ComponentRegistry.getVersionString(this.app));
+        this.AppVersionField.setText(registry.getLibraryVersion(this.appId));
         this.AppNameField.setFont(new java.awt.Font("Dialog", 1, 16));
-        this.AppNameField.setText(ComponentRegistry.getName(this.app));
+        this.AppNameField.setText(registry.getLibraryName(this.appId));
         this.jPanel1.setLayout(this.gridLayout1);
         this.ComponentsTable.setFont(new java.awt.Font("Dialog", 1, 12));
         this.ComponentsTable.setMinimumSize(new Dimension(200, 50));
@@ -79,16 +79,12 @@ public class AboutDialog extends JDialog {
         this.ComponentsTable.setIntercellSpacing(new Dimension(1, 1));
         this.gridLayout1.setRows(3);
         this.getContentPane().add(this.jPanel1, BorderLayout.NORTH);
-        this.jPanel1.add(this.AppAuthorField, null);
-        this.jPanel1.add(this.AppVersionField, null);
         this.jPanel1.add(this.AppNameField, null);
+        this.jPanel1.add(this.AppVersionField, null);
+        this.jPanel1.add(this.AppAuthorField, null);
         this.getContentPane().add(this.jScrollPane1, BorderLayout.CENTER);
         this.jScrollPane1.getViewport().add(this.ComponentsTable, null);
 
-    }
-
-    static {
-        ComponentRegistry.registerComponent(AboutDialog.class);
     }
 
     @Override
@@ -98,13 +94,12 @@ public class AboutDialog extends JDialog {
             table.addColumn("Component");
             table.addColumn("Version");
             table.addColumn("Author");
-            Iterator<?> iterate = ComponentRegistry.listRegisteredComponents();
-            while (iterate.hasNext()) {
-                Class<?> component = (Class<?>) iterate.next();
-                if (component != this.app) {
-                    table.addRow(new String[] { ComponentRegistry.getName(component),
-                            ComponentRegistry.getVersionString(component),
-                            ComponentRegistry.getAuthor(component) });
+            LibraryRegistry registry = new LibraryRegistry();
+            for (LibraryIdentifier id: registry.listLibraries()) {
+                if (! id.equals(this.appId)) {
+                    table.addRow(new String[] { registry.getLibraryName(id),
+                    		registry.getLibraryVersion(id),
+                    		registry.getLibraryVendor(id) });
                 }
             }
             this.ComponentsTable.setModel(table);

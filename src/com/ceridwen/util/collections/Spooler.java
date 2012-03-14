@@ -97,8 +97,4 @@ public class Spooler extends TimerTask implements Queue {
     public int size() {
         return this.queue.size();
     }
-
-    static {
-        com.ceridwen.util.versioning.ComponentRegistry.registerComponent(Spooler.class);
-    }
 }

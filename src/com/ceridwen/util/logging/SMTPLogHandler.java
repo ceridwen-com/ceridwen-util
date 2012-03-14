@@ -83,11 +83,6 @@ public class SMTPLogHandler extends AbstractLogHandler {
     public void close() throws java.lang.SecurityException {
         this.daemon.stopMailer();
     }
-
-    static {
-        com.ceridwen.util.versioning.ComponentRegistry.registerComponent(SMTPLogHandler.class);
-    }
-
 }
 
 class QueuedMail {
