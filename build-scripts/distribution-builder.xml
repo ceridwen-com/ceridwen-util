@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project>
+	<import file="jar-builder.xml"/>
+	
+	<target name="distribution-init" depends="create-jar">
+        <copy todir="${distrib.dir}">
+          <fileset dir="${readme.dir}" includes="*.txt" />
+        </copy>
+        <copy todir="${distrib.dir}/${distrib.doc.subdir}">
+          <fileset dir="${doc.dir}" includes="**" />
+        </copy>
+	</target>
+	
+	<target name="copy-library">
+        <copy todir="${distrib.dir}/${distrib.lib.subdir}">
+          <fileset dir="${lib.dir}/${lib.name}" includes="*.jar" />
+        </copy>
+        <copy todir="${distrib.dir}/${distrib.license.subdir}/${lib.name}">
+          <fileset dir="${lib.dir}/${lib.name}" includes="*.txt" />
+        </copy>		
+	</target>
+	
+	<target name="distribution-complete">
+	    <zip destfile="${artifact.dir}/${library.base-name}-${implementation-short-version}.zip">
+    		  <zipfileset dir ="${distrib.dir}/" />
+    	</zip>
+	</target>	
+</project>	

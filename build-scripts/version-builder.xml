@@ -2,6 +2,7 @@
 
 <project>
 	<property name="build-data.properties" value="build-data.properties" />
+	<property name="build-dirs.properties" value="build-dirs.properties" />
 	
  	<target name="update" >
     	<available file="${build-data.properties}" property="build-data-available" />
@@ -36,12 +37,14 @@
 	
 	<target name="init-properties" depends="ci-update">
 		<property file="${build-data.properties}"/>
+		<property name="library.base-name" value="${Library-Base-Name}"/>
 		<property name="implementation-title" value="${Library-Name}"/>
 		<property name="implementation-short-version" value="${Library-Version}"/>
 		<property name="implementation-vendor" value="${Library-Vendor}"/>
 		<property name="implementation-vendor-id" value="${Library-Vendor-Id}"/>
 		<property name="implementation-url" value="${Library-URL}"/>
 		<property name="implementation-build-date" value="${Library-Build-Date}"/>
+		<property file="${build-dirs.properties}"/>
 	</target>
 
 	<target name="ci-build-prop" depends="init-properties" if="${bamboo}">

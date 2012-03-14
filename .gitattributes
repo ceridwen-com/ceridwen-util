@@ -1,14 +1,17 @@
 * text=auto !eol
 /.classpath -text
-.externalToolBuilders/Create[!!-~]Jar.launch -text
+.externalToolBuilders/Create[!!-~]Distribution.launch -text
+.externalToolBuilders/Javadoc.launch -text
 /.project -text
 .settings/org.eclipse.core.resources.prefs -text svneol=unset#text/plain
 /build-data.properties -text
+/build-dirs.properties -text
+build-scripts/distribution-builder.xml -text
 build-scripts/jar-builder.xml -text
-build-scripts/stamp-build.xml -text
+build-scripts/version-builder.xml -text
 /build.xml -text svneol=unset#text/plain
-/changelog.txt -text svneol=unset#text/plain
-/create-jar.xml -text svneol=unset#text/plain
+/create-distribution.xml -text svneol=unset#text/plain
+/javadoc.xml -text
 lib/commons-lang3-3.1/LICENSE.txt -text
 lib/commons-lang3-3.1/NOTICE.txt -text
 lib/commons-lang3-3.1/RELEASE-NOTES.txt -text
@@ -23,7 +26,8 @@ lib/commons-net-3.1/LICENSE.txt -text
 lib/commons-net-3.1/NOTICE.txt -text
 lib/commons-net-3.1/RELEASE-NOTES.txt -text
 lib/commons-net-3.1/commons-net-3.1.jar -text
-/license.txt -text svneol=unset#text/plain
+readme/changelog.txt -text svneol=unset#text/plain
+readme/license.txt -text svneol=unset#text/plain
 src/com/ceridwen/util/collections/PersistentQueue.java -text
 src/com/ceridwen/util/collections/Queue.java -text
 src/com/ceridwen/util/collections/Spooler.java -text

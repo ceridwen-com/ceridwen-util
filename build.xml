@@ -6,6 +6,7 @@
               as the first entry and export the buildfile again. -->
 <project basedir="." default="build" name="Utilities">
     <property environment="env"/>
+    <property name="Circulation.location" value="../Circulation"/>
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.6"/>
     <property name="source" value="1.6"/>
@@ -40,7 +41,10 @@
             <classpath refid="Utilities.classpath"/>
         </javac>
     </target>
-    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects">
+        <ant antfile="build.xml" dir="${Circulation.location}" inheritAll="false" target="clean"/>
+        <ant antfile="build.xml" dir="${Circulation.location}" inheritAll="false" target="build"/>
+    </target>
     <target name="LibraryRegistry">
         <java classname="com.ceridwen.util.versioning.LibraryRegistry" failonerror="true" fork="yes">
             <classpath refid="Utilities.classpath"/>
