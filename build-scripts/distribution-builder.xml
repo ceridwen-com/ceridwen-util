@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Build script module for packaging application for distribution -->
 
 <project>
 	<import file="jar-builder.xml"/>

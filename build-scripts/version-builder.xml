@@ -1,4 +1,6 @@
 <?xml version="1.0"?>
+<!-- Build script module for loading build properties and updating build numbers -->
+<!-- Autodect Bamboo and use its build data, otherwise using build count -->
 
 <project>
 	<property name="build-data.properties" value="build-data.properties" />
