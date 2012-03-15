@@ -35,15 +35,27 @@ public class LibraryRegistry {
     	loadLibraries();
     }
     
-    private String getLibraryData(LibraryIdentifier id, String key) {
-    	Attributes attr = libraries.get(id);
+    private String getLibraryData(Attributes attr, String key) {
     	if (attr != null) {
-    		String value = attr.getValue(key);
+    		String value = attr.getValue("Implementation-" + key);
+    		if (value != null) {
+    			return value;
+    		}
+    		value = attr.getValue("Specification-" + key);
     		if (value != null) {
     			return value;
     		}
     	}
-    	return "(unknown)";
+    	return null;    	
+    }
+    
+    private String getLibraryData(LibraryIdentifier id, String key) {
+    	String value = getLibraryData(libraries.get(id), key);
+    	if (value == null) {
+    		return "(unknown)"; 
+    	} else {
+    		return value;
+    	}
     }
 
     public Set<LibraryIdentifier> listLibraries() {
@@ -51,24 +63,24 @@ public class LibraryRegistry {
     }
 
     public String getLibraryName(LibraryIdentifier id) {
-    	return getLibraryData(id, "Implementation-Title");
+    	return getLibraryData(id, "Title");
     }
     
     public String getLibraryVersion(LibraryIdentifier id) {
-    	return getLibraryData(id, "Implementation-Version");
+    	return getLibraryData(id, "Version");
     }
 
     public String getLibraryBuildDate(LibraryIdentifier id) {
-    	return getLibraryData(id, "Implementation-Build-Date");
+    	return getLibraryData(id, "Build-Date");
     }
 
 
     public String getLibraryVendor(LibraryIdentifier id) {
-    	return getLibraryData(id, "Implementation-Vendor");
+    	return getLibraryData(id, "Vendor");
     }
     
     public String getLibraryVendorId(LibraryIdentifier id) {
-    	return getLibraryData(id, "Implementation-Vendor-Id");
+    	return getLibraryData(id, "Vendor-Id");
     }
     
     private void loadLibraries() {
@@ -83,14 +95,16 @@ public class LibraryRegistry {
                     if (is != null) {
                         Manifest manifest = new Manifest(is);
                         Attributes mainAttribs = manifest.getMainAttributes();
-                        String libraryName = mainAttribs.getValue("Implementation-Title");
-                        String vendorId = mainAttribs.getValue("Implementation-Vendor-Id");
-                        LibraryIdentifier id = new LibraryIdentifier(vendorId, libraryName);
-                    	if (libraries.containsKey(id)) {
-                    		//TODO: check for different versions of same library
-                    	} else {
-                    		libraries.put(id, mainAttribs);
-                    	}
+                        String libraryName = getLibraryData(mainAttribs, "Title");
+                        String vendorId = getLibraryData(mainAttribs, "Vendor-Id");
+                        if (libraryName != null) {
+                        	LibraryIdentifier id = new LibraryIdentifier(vendorId, libraryName);
+	                    	if (libraries.containsKey(id)) {
+	                    		//TODO: check for different versions of same library
+	                    	} else {
+	                    		libraries.put(id, mainAttribs);
+	                    	}
+                        }
                     }
                 }
                 catch (Exception e) {
