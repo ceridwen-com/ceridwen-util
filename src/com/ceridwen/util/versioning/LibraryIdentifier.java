@@ -10,12 +10,35 @@ public class LibraryIdentifier {
 	}
 	
 	public boolean equals(Object obj) {
-		if (obj instanceof LibraryIdentifier && obj != null) {
-			if (this.libraryName.equals(((LibraryIdentifier)obj).libraryName) && this.vendorId.equals(((LibraryIdentifier)obj).vendorId)) {
-				return true;
+		if (obj == null) {
+			return false;
+		}
+		
+		if (!(obj instanceof LibraryIdentifier)) {
+			return false;
+		}
+		
+		if (this.libraryName == null) {
+			if (((LibraryIdentifier)obj).libraryName != null) {
+				return false;
 			}
-		}			
-		return false;
+		} else { 
+			if (!(this.libraryName.equals(((LibraryIdentifier)obj).libraryName))) {
+				return false;
+			}
+		}
+		
+		if (this.vendorId == null) {
+			if (((LibraryIdentifier)obj).vendorId != null) {
+				return false;
+			}
+		} else { 
+			if (!(this.vendorId.equals(((LibraryIdentifier)obj).vendorId))) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 	
 	public int hashCode() {

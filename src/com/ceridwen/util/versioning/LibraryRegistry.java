@@ -112,7 +112,7 @@ public class LibraryRegistry {
     						   reg.getLibraryVendorId(id));
     	}
     	
-//    	AboutDialog dlg = new AboutDialog(null, true, new LibraryIdentifier("ceridwen.com", "Ceridwen Utilities"));
+//    	AboutDialog dlg = new AboutDialog(null, true, new LibraryIdentifier("org.apache", "Commons Lang"));
 //    	dlg.setVisible(true);
     }
 
