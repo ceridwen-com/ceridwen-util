@@ -4,19 +4,21 @@
               To include a user specific buildfile here, simply create one in the same
               directory with the processing instruction <?eclipse.ant.import?>
               as the first entry and export the buildfile again. -->
-<project basedir="." default="build" name="Utilities">
+<project basedir="." default="build" name="Utilities2">
     <property environment="env"/>
-    <property name="Circulation.location" value="../Circulation"/>
+    <property name="ECLIPSE_HOME" value="C:/eclipse"/>
+    <property name="junit.output.dir" value="test-reports"/>
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.6"/>
     <property name="source" value="1.6"/>
-    <path id="Utilities.classpath">
+    <path id="Utilities2.classpath">
         <pathelement location="bin"/>
         <pathelement location="lib/commons-logging-1.1.1/commons-logging-1.1.1.jar"/>
         <pathelement location="lib/commons-logging-1.1.1/commons-logging-adapters-1.1.1.jar"/>
         <pathelement location="lib/commons-logging-1.1.1/commons-logging-api-1.1.1.jar"/>
         <pathelement location="lib/commons-lang3-3.1/commons-lang3-3.1.jar"/>
         <pathelement location="lib/commons-net-3.1/commons-net-3.1.jar"/>
+        <pathelement location="lib/junit-4.10/junit-4.10.jar"/>
     </path>
     <target name="init">
         <mkdir dir="bin"/>
@@ -38,16 +40,24 @@
         <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
             <src path="src"/>
             <exclude name="com/ceridwen/util/logging/JabberLogHandler.java"/>
-            <classpath refid="Utilities.classpath"/>
+            <classpath refid="Utilities2.classpath"/>
         </javac>
     </target>
-    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects">
-        <ant antfile="build.xml" dir="${Circulation.location}" inheritAll="false" target="clean"/>
-        <ant antfile="build.xml" dir="${Circulation.location}" inheritAll="false" target="build"/>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+    <target name="src">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.gaborcselle.persistent.PersistentQueueTest" todir="${junit.output.dir}"/>
+            <classpath refid="Utilities2.classpath"/>
+        </junit>
     </target>
-    <target name="LibraryRegistry">
-        <java classname="com.ceridwen.util.versioning.LibraryRegistry" failonerror="true" fork="yes">
-            <classpath refid="Utilities.classpath"/>
-        </java>
+    <target name="junitreport">
+        <junitreport todir="${junit.output.dir}">
+            <fileset dir="${junit.output.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${junit.output.dir}"/>
+        </junitreport>
     </target>
 </project>

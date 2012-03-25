@@ -26,6 +26,7 @@ lib/commons-net-3.1/LICENSE.txt -text
 lib/commons-net-3.1/NOTICE.txt -text
 lib/commons-net-3.1/RELEASE-NOTES.txt -text
 lib/commons-net-3.1/commons-net-3.1.jar -text
+lib/junit-4.10/junit-4.10.jar -text
 readme/changelog.txt -text svneol=unset#text/plain
 readme/license.txt -text svneol=unset#text/plain
 src/com/ceridwen/util/collections/Queue.java -text
