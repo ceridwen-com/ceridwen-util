@@ -25,6 +25,8 @@ import java.io.Serializable;
 import java.io.StreamCorruptedException;
 import java.util.LinkedList;
 
+import com.ceridwen.util.collections.Queue;
+
 /** 
  * A concurrent persistent queue. It keeps a copy of its status in a file on disk
  * which is updated every time the queue contents are modified. Therefore, the data 
@@ -51,7 +53,7 @@ import java.util.LinkedList;
  * @author Gabor Cselle
  * @version 1.0
  */
-public class PersistentQueue<E extends Serializable> {
+public class PersistentQueue<E extends Serializable> implements Queue<E> {
     private final String filename;
     private final int defragmentInterval;
     /** How many remove()s have we executed since last defragmenting the file? */

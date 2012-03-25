@@ -18,6 +18,8 @@
  ******************************************************************************/
 package com.ceridwen.util.collections;
 
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -32,13 +34,13 @@ import org.apache.commons.logging.LogFactory;
  * @version 2.0
  */
 
-public class Spooler extends TimerTask implements Queue {
+public class Spooler<E extends Serializable> extends TimerTask implements Queue<E> {
     private static Log log = LogFactory.getLog(Spooler.class);
-    private Queue queue;
+    private Queue<E> queue;
     private Timer scheduler;
-    private SpoolerProcessor processor;
+    private SpoolerProcessor<E> processor;
 
-    public Spooler(Queue queue, SpoolerProcessor processor, long delay, long period) {
+    public Spooler(Queue<E> queue, SpoolerProcessor<E> processor, long delay, long period) {
         this.queue = queue;
         this.processor = processor;
         this.scheduler = new Timer();
@@ -57,7 +59,7 @@ public class Spooler extends TimerTask implements Queue {
         int loop = this.queue.size();
         for (int n = 0; n < loop; n++) {
             try {
-                Object o = this.queue.remove();
+                E o = this.queue.remove();
                 if (!this.processor.process(o)) {
                     this.queue.add(o);
                 }
@@ -74,18 +76,18 @@ public class Spooler extends TimerTask implements Queue {
     }
 
     @Override
-    public void add(Object o) {
+    public void add(E o) throws IOException {
         this.queue.add(o);
     }
 
     @Override
-    public Object remove() {
+    public E remove() throws IOException {
         return this.queue.remove();
     }
 
     @Override
-    public Object peek(int n) {
-        return this.queue.peek(n);
+    public E peek() {
+        return this.queue.peek();
     }
 
     @Override

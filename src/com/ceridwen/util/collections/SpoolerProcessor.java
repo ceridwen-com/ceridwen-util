@@ -18,6 +18,8 @@
  ******************************************************************************/
 package com.ceridwen.util.collections;
 
+import java.io.Serializable;
+
 /**
  * <p>Title: RTSI</p> <p>Description: Real Time Self Issue</p> <p>Copyright:
  * </p> <p>Company: </p>
@@ -26,6 +28,6 @@ package com.ceridwen.util.collections;
  * @version 2.0
  */
 
-public interface SpoolerProcessor {
-    boolean process(Object o);
+public interface SpoolerProcessor<E extends Serializable> {
+    boolean process(E o);
 }

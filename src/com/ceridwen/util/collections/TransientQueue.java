@@ -27,22 +27,23 @@ package com.ceridwen.util.collections;
  * @version 2.0
  */
 
+import java.io.Serializable;
 import java.util.Vector;
 
-public class TransientQueue implements Queue {
-    private Vector<Object> items;
+public class TransientQueue<E extends Serializable> implements Queue<E> {
+    private Vector<E> items;
 
     public TransientQueue() {
-        this.items = new Vector<Object>();
+        this.items = new Vector<E>();
     }
 
     @Override
-    public void add(Object o) {
+    public void add(E o) {
         this.items.add(o);
     }
 
     @Override
-    public Object remove() {
+    public E remove() {
         if (this.items.isEmpty()) {
             return null;
         } else {
@@ -51,8 +52,8 @@ public class TransientQueue implements Queue {
     }
 
     @Override
-    public Object peek(int n) {
-        return this.items.get(n);
+    public E peek() {
+        return this.items.get(0);
     }
 
     @Override

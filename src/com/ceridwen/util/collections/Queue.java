@@ -18,6 +18,9 @@
  ******************************************************************************/
 package com.ceridwen.util.collections;
 
+import java.io.IOException;
+import java.io.Serializable;
+
 /**
  * <p>Title: RTSI</p> <p>Description: Real Time Self Issue</p> <p>Copyright:
  * </p> <p>Company: </p>
@@ -26,14 +29,14 @@ package com.ceridwen.util.collections;
  * @version 2.0
  */
 
-public interface Queue {
-    void add(Object o);
+public interface Queue<E extends Serializable> {
+    public void add(E o) throws IOException;
 
-    Object peek(int n);
+    public E peek();
 
-    Object remove();
+    public E remove() throws IOException;
 
-    boolean isEmpty();
+    public boolean isEmpty();
 
-    int size();
+    public int size();
 }

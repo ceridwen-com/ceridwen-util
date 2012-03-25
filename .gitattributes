@@ -28,7 +28,6 @@ lib/commons-net-3.1/RELEASE-NOTES.txt -text
 lib/commons-net-3.1/commons-net-3.1.jar -text
 readme/changelog.txt -text svneol=unset#text/plain
 readme/license.txt -text svneol=unset#text/plain
-src/com/ceridwen/util/collections/PersistentQueue.java -text
 src/com/ceridwen/util/collections/Queue.java -text
 src/com/ceridwen/util/collections/Spooler.java -text
 src/com/ceridwen/util/collections/SpoolerProcessor.java -text
