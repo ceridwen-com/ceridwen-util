@@ -45,3 +45,7 @@ src/com/ceridwen/util/net/TimeoutSocketFactory.java -text
 src/com/ceridwen/util/versioning/AboutDialog.java -text
 src/com/ceridwen/util/versioning/LibraryIdentifier.java -text
 src/com/ceridwen/util/versioning/LibraryRegistry.java -text
+src/com/gaborcselle/persistent/PersistentQueue.java -text
+src/com/gaborcselle/persistent/PersistentQueueDeleteMarker.java -text
+src/com/gaborcselle/persistent/PersistentQueueTest.java -text
+src/com/gaborcselle/persistent/PersistentQueueTestEntry.java -text
