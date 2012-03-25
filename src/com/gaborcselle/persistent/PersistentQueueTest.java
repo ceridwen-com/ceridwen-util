@@ -15,9 +15,14 @@
 
 package com.gaborcselle.persistent;
 
+import static org.junit.Assert.*;
+
 import java.io.File;
 
-import junit.framework.TestCase;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
 
 /**
  * Unit test for {@link com.gaborcselle.persistent.PersistentQueue}.
@@ -25,19 +30,19 @@ import junit.framework.TestCase;
  * @author Gabor Cselle
  * @version 1.0
  */
-public class PersistentQueueTest extends TestCase {
+public class PersistentQueueTest {
     /** Filename of queue file that should be used for testing. */
-    private static final String TEST_FILENAME = "D:\\cvs\\testdata\\persQueueTest.queue";
-    private PersistentQueue<PersistentQueueTestEntry> pqueue;
+    private String TEST_FILENAME;
+	private PersistentQueue<PersistentQueueTestEntry> pqueue;
 
     /** 
      * Set up unit test - delete the test file if it already exists,
      * instantiate PersistentQueue.
      */
-    protected void setUp() throws Exception {
-        super.setUp();
-        
+    @Before
+    public void setUp() throws Exception {
         // delete file, if any exists
+        TEST_FILENAME = File.createTempFile("pers", null).getPath();
         File deleteFile = new File(TEST_FILENAME);
         deleteFile.delete();
         
@@ -45,6 +50,7 @@ public class PersistentQueueTest extends TestCase {
     }
     
     /** Test adding and removing a single element. */
+    @Test
     public void testOneElement() throws Exception {        
         pqueue.clear();
         pqueue.add(new PersistentQueueTestEntry ("one"));
@@ -55,6 +61,7 @@ public class PersistentQueueTest extends TestCase {
     }
     
     /** Test adding and removing a lot of elements. */
+    @Test
     public void testALotOfElements() throws Exception {
         pqueue.clear();
         
@@ -71,6 +78,7 @@ public class PersistentQueueTest extends TestCase {
     }
     
     /** Test the method {@link PersistentQueue#size()} */
+    @Test
     public void testSize() throws Exception {
         pqueue.clear();
         
@@ -90,6 +98,7 @@ public class PersistentQueueTest extends TestCase {
     }
     
     /** Test what happens when removing from an empty queue. */
+    @Test
     public void testRemoveFromEmptyQueue() throws Exception {
         pqueue.clear();
         
@@ -97,6 +106,7 @@ public class PersistentQueueTest extends TestCase {
     }
     
     /** Simulate a crash and reload of the PersistentQueue. */
+    @Test
     public void testRecoverFromLost() throws Exception {
         pqueue.clear();
         pqueue.add(new PersistentQueueTestEntry ("one"));
@@ -110,6 +120,7 @@ public class PersistentQueueTest extends TestCase {
      * Write 20 elements, remove 10, then lose PersistentQueue.
      * Also forces a defragment because it sets deframentInterval to 9. 
      * */
+    @Test
     public void testWriteList() throws Exception {
         pqueue.clear();
         
@@ -132,9 +143,8 @@ public class PersistentQueueTest extends TestCase {
     }
     
     /** Tear down unit test: delete the file created by PersistentQueue. */
-    protected void tearDown() throws Exception {
-        super.tearDown();
-        
+    @After
+    public void tearDown() throws Exception {
         // delete the file created by pqueue
         File deleteFile = new File(TEST_FILENAME);
         deleteFile.delete();
