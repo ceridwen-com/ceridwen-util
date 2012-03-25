@@ -93,11 +93,11 @@ public class PersistentQueue<E extends Serializable> {
         File file = new File(filename);
         
         // if file does exists:
-        if (file.exists()) {
+        if (file.exists() && !file.isDirectory()) {
             // read in the file contents
             readStateFromFile(this.filename);
         } else {
-            // else, if file exists
+            // else, if file does not exist
             createEmptyFile(this.filename);
         }
     }
@@ -164,23 +164,34 @@ public class PersistentQueue<E extends Serializable> {
         
         return entry;
     }
-
+    
     /**
      * Adds an element to the tail of the queue.
      * @param element the element to add
      * @throws IOException if an I/O error occurs
      */
     public synchronized void add(E element) throws IOException {
-        appendEntryToFile(filename, element);
-        
         list.add(element);
-        
+
+        try {
+			appendEntryToFile(filename, element);
+		} catch (IOException e) {
+			// file will be inconsistent so force a defragment on next delete
+			removesSinceDefragment = defragmentInterval + 1;
+			throw e;
+		}
+
         return;
     }
     
     /** Creates an empty file with no content (0 bytes size) with given filename. */
     private void createEmptyFile(String filename) throws IOException {
         File emptyFile = new File(filename);
+                
+        // Create parent directories
+        File directory = new File(emptyFile.getParent());
+        directory.mkdirs();
+        
         if (!emptyFile.createNewFile()) {
             throw new IOException("Could not create new file: " + filename);
         }
