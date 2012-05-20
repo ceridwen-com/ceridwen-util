@@ -160,18 +160,16 @@ public class PersistentQueue<E extends Serializable> implements Queue<E> {
     }
 
     public static void main(String[] args) {
-        PersistentQueue<String> q = new PersistentQueue<String>(new File("c:/temp/queue"));
-        new Spooler<String>(q, new SpoolerProcessor<String>() {
-            @Override
-            public boolean process(String o) {
-                System.out.println("Item: " + o);
-                return true;
-            }
-        }
-
-        , 10000, 10000);
-
         try {
+	        PersistentQueue<String> q = new PersistentQueue<String>(new File("c:/temp/queue"));
+	        new Spooler<String>(q, new SpoolerProcessor<String>() {
+	            @Override
+	            public boolean process(String o) {
+	                System.out.println("Item: " + o);
+	                return true;
+	            }
+	        }, 10000, 10000);
+
 	        q.add("20");
 	        q.add("19");
 	        q.add("18");
