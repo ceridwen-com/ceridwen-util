@@ -190,16 +190,16 @@ public class PersistentQueue<E extends Serializable> implements Queue<E> {
 	        q.add("3");
 	        q.add("2");
 	        q.add("1");
+
+	        int size = -1;
+	        while (true) {
+	            if (q.size() != size) {
+	                System.out.println("Size: " + q.size());
+	                size = q.size();
+	            }
+	        }
         } catch (Exception ex) {
         	ex.printStackTrace();
-        }
-
-        int size = -1;
-        while (true) {
-            if (q.size() != size) {
-                System.out.println("Size: " + q.size());
-                size = q.size();
-            }
         }
     }
 }
