@@ -25,6 +25,9 @@ import java.io.Serializable;
 import java.io.StreamCorruptedException;
 import java.util.LinkedList;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.ceridwen.util.collections.Queue;
 
 /** 
@@ -54,6 +57,9 @@ import com.ceridwen.util.collections.Queue;
  * @version 1.0
  */
 public class PersistentQueue<E extends Serializable> implements Queue<E> {
+    private static Log log = LogFactory.getLog(PersistentQueue.class);
+	
+	
     private final String filename;
     private final int defragmentInterval;
     /** How many remove()s have we executed since last defragmenting the file? */
@@ -87,21 +93,26 @@ public class PersistentQueue<E extends Serializable> implements Queue<E> {
      * @throws IOException if an I/O error occurs
      */
     public PersistentQueue(String filename, int defragmentInterval) throws IOException {
-        this.filename = filename;
-        this.defragmentInterval = defragmentInterval;
-        this.removesSinceDefragment = 0;
-        
-        list = new LinkedList<E>();
-        File file = new File(filename);
-        
-        // if file does exists:
-        if (file.exists() && !file.isDirectory()) {
-            // read in the file contents
-            readStateFromFile(this.filename);
-        } else {
-            // else, if file does not exist
-            createEmptyFile(this.filename);
-        }
+    	try {
+	        this.filename = filename;
+	        this.defragmentInterval = defragmentInterval;
+	        this.removesSinceDefragment = 0;
+	        
+	        list = new LinkedList<E>();
+	        File file = new File(filename);
+	        
+	        // if file does exists:
+	        if (file.exists() && !file.isDirectory()) {
+	            // read in the file contents
+	            readStateFromFile(this.filename);
+	        } else {
+	            // else, if file does not exist
+	            createEmptyFile(this.filename);
+	        }
+    	} catch (Exception ex) {
+            PersistentQueue.log.fatal("Could not create queue store: " + this.filename);
+            throw new IOException(ex);
+    	}
     }
 
     /**
