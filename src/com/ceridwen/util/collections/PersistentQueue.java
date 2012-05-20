@@ -101,6 +101,10 @@ public class PersistentQueue<E extends Serializable> implements Queue<E> {
         }
     }
 
+    public PersistentQueue(String file) {
+    	this(new File(file));    	
+    }
+    
     public PersistentQueue(File file) {
         try {
             this.store = file;
