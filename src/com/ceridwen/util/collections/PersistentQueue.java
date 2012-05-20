@@ -101,11 +101,11 @@ public class PersistentQueue<E extends Serializable> implements Queue<E> {
         }
     }
 
-    public PersistentQueue(String file) {
+    public PersistentQueue(String file) throws IOException {
     	this(new File(file));    	
     }
     
-    public PersistentQueue(File file) {
+    public PersistentQueue(File file) throws IOException {
         try {
             this.store = file;
 
@@ -120,6 +120,7 @@ public class PersistentQueue<E extends Serializable> implements Queue<E> {
             }
         } catch (Exception ex) {
             PersistentQueue.log.fatal("Could not create queue store: " + ((this.store != null) ? this.store.getAbsolutePath() : null));
+            throw new IOException(ex);
         }
     }
 
