@@ -6,3 +6,9 @@
 /dist
 /distrib
 doc/javadoc
+.externalToolBuilders
+.settings
+.classpath
+.gitattributes
+.project
+/target/
