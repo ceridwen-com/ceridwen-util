@@ -25,7 +25,7 @@ import java.math.BigInteger;
  * 
  * (The following description is from the web page for the C and Assembler
  * source code at University of Bradford * Yorkshire, England - The Cryptography
- * & Computer Communications Security Group) The description is used with the
+ * and Computer Communications Security Group) The description is used with the
  * permission of the authors, * Dr S J Shepherd and D A G Gillies.
  * 
  * The Tiny Encryption Algorithm is one of the fastest and most efficient
@@ -45,6 +45,8 @@ public class TEAAlgorithm {
 
     /**
      * Encodes and decodes "Hello world!" for your personal pleasure.
+     * 
+     * @param args	Command line arguments
      * */
 
     public static void main(String args[]) {

@@ -36,7 +36,7 @@ import org.apache.commons.net.smtp.SMTPClient;
  */
 
 /**
- * @todo: adjust synchronous connection
+ * TODO adjust synchronous connection
  * 
  */
 

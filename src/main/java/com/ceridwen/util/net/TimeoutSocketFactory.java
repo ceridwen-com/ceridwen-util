@@ -26,18 +26,6 @@ import java.net.UnknownHostException;
 
 import org.apache.commons.net.DefaultSocketFactory;
 
-/**
- * <p>Title: </p>
- * 
- * <p>Description: </p>
- * 
- * <p>Copyright: Copyright (c) 2004</p>
- * 
- * <p>Company: </p>
- * 
- * @author not attributable
- * @version 1.0
- */
 public class TimeoutSocketFactory
         extends DefaultSocketFactory {
     private int connectionTimeout = 0;
@@ -55,7 +43,9 @@ public class TimeoutSocketFactory
      *            int
      * @return Socket
      * @throws UnknownHostException
+     *            Unknown host
      * @throws IOException
+     *            I\O Error
      */
     @Override
     public Socket createSocket(String string, int _int) throws
@@ -75,6 +65,7 @@ public class TimeoutSocketFactory
      *            int
      * @return Socket
      * @throws IOException
+     *            I\O Error
      */
     @Override
     public Socket createSocket(InetAddress inetAddress, int _int) throws
@@ -99,6 +90,7 @@ public class TimeoutSocketFactory
      *            int
      * @return Socket
      * @throws IOException
+     *            I\O Error
      */
     @Override
     public Socket createSocket(InetAddress inetAddress, int _int,
@@ -126,7 +118,9 @@ public class TimeoutSocketFactory
      *            int
      * @return Socket
      * @throws UnknownHostException
+     *            Unknown host
      * @throws IOException
+     *            I\O Error
      */
     @Override
     public Socket createSocket(String string, int _int, InetAddress inetAddress,
