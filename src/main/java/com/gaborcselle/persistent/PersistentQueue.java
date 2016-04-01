@@ -110,7 +110,7 @@ public class PersistentQueue<E extends Serializable> implements Queue<E> {
 	            createEmptyFile(this.filename);
 	        }
     	} catch (Exception ex) {
-            PersistentQueue.log.fatal("Could not create queue store: " + this.filename);
+            PersistentQueue.log.fatal("Could not create queue store: " + filename);
             throw new IOException(ex);
     	}
     }
