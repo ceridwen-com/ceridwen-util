@@ -18,64 +18,34 @@
  ******************************************************************************/
 package com.ceridwen.util.logging;
 
-import org.jivesoftware.smack.Chat;
-import org.jivesoftware.smack.GroupChat;
-import org.jivesoftware.smack.SSLXMPPConnection;
-import org.jivesoftware.smack.XMPPConnection;
-import org.jivesoftware.smack.XMPPException;
+import org.jivesoftware.smack.chat.Chat;
+import org.jivesoftware.smack.chat.ChatManager;
+import org.jivesoftware.smack.AbstractXMPPConnection;
+import org.jivesoftware.smack.SmackException.NotConnectedException;
+import org.jivesoftware.smack.tcp.XMPPTCPConnection;
 
 public class JabberLogHandler
     extends AbstractLogHandler {
 
   private String host;
-  private int port;
   private String username;
   private String password;
   private String recipient;
-  private final boolean chatroom = false;
-  private String nickname;
-  private String app;
-  private final boolean SSL = false;
 
-  protected XMPPConnection con;
-  protected Chat chat;
-  protected GroupChat groupchat;
+  protected AbstractXMPPConnection con;
 
-  public JabberLogHandler(String host, int port, String username, String password, String app) {
+  public JabberLogHandler(String host, String username, String password, String recipient) {
     this.host = host;
-    this.port = port;
     this.username = username;
     this.password = password;
-    this.app = app;
-    recipient = "logs@" + host;
-    try {
-      nickname = java.net.InetAddress.getLocalHost().getCanonicalHostName();
-    } catch (Exception ex) {
-      nickname = "unknown";
-    }
-    open();
+    this.recipient = recipient;
   }
 
   public void open() {
       try {
-          // Create a connection to the XMPP server
-          if (SSL) {
-              con = new SSLXMPPConnection(host, port);
-          } else {
-              con = new XMPPConnection(host, port);
-          }
-
-          // Most servers require you to login before performing other tasks
-          con.login(username, password, app);
-
-          // Start a conversation with IMAddress
-          if (chatroom) {
-              groupchat = con.createGroupChat(recipient);
-              groupchat.join((nickname != null)?nickname:username);
-          } else {
-              chat = con.createChat(recipient);
-          }
-
+    	  con = new XMPPTCPConnection(username, password, host);
+    	  con.connect();
+    	  con.login();
       } catch (Exception ex) {
         ex.printStackTrace();
       }
@@ -92,12 +62,10 @@ public class JabberLogHandler
     // Closes the connection by setting presence to unavailable
     // then closing the stream to the XMPP server.
     if (con != null) {
-      con.close();
+      con.disconnect();
     }
     // Help GC
     con = null;
-    chat = null;
-    groupchat = null;
   }
 
   /**
@@ -109,14 +77,18 @@ public class JabberLogHandler
 
   protected void sendMessage(String logger, String level, String message) {
     try {
-      if (chatroom) {
-        groupchat.sendMessage(message);
-      }
-      else {
-        chat.sendMessage(message);
-      }
+      open();
+      
+      ChatManager chatmanager = ChatManager.getInstanceFor(con);  
+      Chat chat = chatmanager.createChat(recipient);
+     
+      chat.sendMessage(message);
+      
+      chat.close();
+      
+      close();
     }
-    catch (XMPPException ex) {
+    catch (NotConnectedException ex) {
     }
   }
 }
