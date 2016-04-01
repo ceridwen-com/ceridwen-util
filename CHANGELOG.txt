@@ -1,3 +1,11 @@
+Version 1.6.2: 01/04/2016
+Updated dependencies and update to java 1.8.
+Dependencies: apache commons-lang3 3.4
+              apache commons-logging 1.2
+              apache commons-net 3.4
+              igniterealtime smack 4.1.6
+
+
 Version 1.61: 20/05/2012 (407)
 Re-implemented com.ceridwen.util.collection.PersistentQueue for backwards compatibility
 Dependencies: apache commons lang 3.1
