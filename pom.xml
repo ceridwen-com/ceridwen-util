@@ -25,8 +25,8 @@
   <packaging>jar</packaging>
 
   <name>ceridwen-util</name>
-  <description>***CHANGEME***</description>
-  <inceptionYear>***CHANGEME***</inceptionYear>
+  <description>General helper and utility java classes</description>
+  <inceptionYear>2004</inceptionYear>
   <url>https://software.ceridwen.com/redmine/projects/ceridwen-util</url>
   <organization>
   	<name>Ceridwen Limited</name>
