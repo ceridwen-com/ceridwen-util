@@ -29,6 +29,14 @@
   	<name>Ceridwen Limited</name>
   	<url>http://www.ceridwen.com</url>
   </organization>
+  
+  <licenses>
+    <license>
+      <name>GNU General Public License, Version 3.0</name>
+      <url>http://www.gnu.org/licenses/gpl.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
 
   <issueManagement>
   	<system>Redmine</system>
