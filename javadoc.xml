@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project default="javadoc">
-    <target name="javadoc">
-        <javadoc access="public" author="true" classpath="lib/commons-net-3.1/commons-net-3.1.jar;lib/commons-logging-1.1.1/commons-logging-adapters-1.1.1.jar;lib/commons-logging-1.1.1/commons-logging-api-1.1.1.jar;lib/commons-lang3-3.1/commons-lang3-3.1.jar;lib/commons-logging-1.1.1/commons-logging-1.1.1.jar" destdir="doc/javadoc" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" packagenames="com.ceridwen.util.net,com.ceridwen.util.management.notification,com.ceridwen.util.encryption,com.ceridwen.util.collections,com.ceridwen.util.logging,com.ceridwen.util.versioning" source="1.6" sourcepath="src" splitindex="true" use="true" version="true"/>
-    </target>
-</project>
