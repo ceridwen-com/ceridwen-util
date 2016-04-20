@@ -11,4 +11,8 @@ doc/javadoc
 .classpath
 .gitattributes
 .project
-/target/
+target
+dependency-reduced-pom.xml
+.idea
+*.iml
+.sonar_lock

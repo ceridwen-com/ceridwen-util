@@ -224,6 +224,7 @@
           <allowSnapshots>true</allowSnapshots>
           <keepBranch>true</keepBranch>
           <noDeploy>true</noDeploy>
+          <suppressFastForward>true</suppressFastForward>
         </configuration>
       </plugin>
     </plugins>
