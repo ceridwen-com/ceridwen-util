@@ -13,18 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package com.ceridwen.util.collections;
+package com.ceridwen.util.indirection;
 
-import java.io.Serializable;
-
-/**
- * <p>Title: RTSI</p> <p>Description: Real Time Self Issue</p> <p>Copyright:
- * </p> <p>Company: </p>
- * 
- * @author Matthew J. Dovey
- * @version 2.0
- */
-
-public interface SpoolerProcessor<E extends Serializable> {
-    boolean process(E o);
+public interface Setter<T> {
+	void set(T o, String s);
 }
