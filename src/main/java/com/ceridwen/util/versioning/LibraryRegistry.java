@@ -34,7 +34,11 @@ public class LibraryRegistry {
     
     private String getLibraryData(Attributes attr, String key) {
     	if (attr != null) {
-    		String value = attr.getValue("Implementation-" + key);
+    		String value = attr.getValue(key);
+    		if (value != null) {
+    			return value;
+    		}
+    		value = attr.getValue("Implementation-" + key);
     		if (value != null) {
     			return value;
     		}
