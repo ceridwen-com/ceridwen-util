@@ -13,41 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package com.ceridwen.util.logging;
+package com.ceridwen.util.indirection;
 
-import java.io.IOException;
+import java.util.List;
 
-import com.ceridwen.util.net.Syslog;
-
-public class SyslogLogHandler
-        extends AbstractLogHandler {
-
-    private int port = 514;
-    private String host;
-
-    public SyslogLogHandler(String host, int port) {
-        this.host = host;
-        this.port = port;
-    }
-
-    @Override
-    public void sendMessage(String logger, String level, String message) {
-        try {
-            Syslog.sendSyslog(host, port, logger, Syslog.LOG_ALERT, message);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    @Override
-    public void close() throws SecurityException {
-    }
-
-    /**
-     * Flush any buffered output.
-     * 
-     */
-    @Override
-    public void flush() {
-    }
+public interface Lister<T> {
+	List<String> list(T o);
 }

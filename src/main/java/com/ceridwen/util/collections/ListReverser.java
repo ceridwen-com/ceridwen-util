@@ -13,41 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package com.ceridwen.util.logging;
+package com.ceridwen.util.collections;
 
-import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
-import com.ceridwen.util.net.Syslog;
+public class ListReverser<T> implements Iterable<T> {
+    private ListIterator<T> listIterator;        
 
-public class SyslogLogHandler
-        extends AbstractLogHandler {
+    public ListReverser(List<T> wrappedList) {
+        this.listIterator = wrappedList.listIterator(wrappedList.size());            
+    }               
 
-    private int port = 514;
-    private String host;
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
 
-    public SyslogLogHandler(String host, int port) {
-        this.host = host;
-        this.port = port;
+            public boolean hasNext() {
+                return listIterator.hasPrevious();
+            }
+
+            public T next() {
+                return listIterator.previous();
+            }
+
+            public void remove() {
+                listIterator.remove();
+            }
+
+        };
     }
 
-    @Override
-    public void sendMessage(String logger, String level, String message) {
-        try {
-            Syslog.sendSyslog(host, port, logger, Syslog.LOG_ALERT, message);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    @Override
-    public void close() throws SecurityException {
-    }
-
-    /**
-     * Flush any buffered output.
-     * 
-     */
-    @Override
-    public void flush() {
-    }
 }
