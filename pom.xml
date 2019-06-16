@@ -227,8 +227,9 @@
                         <supportBranchPrefix>support//${project.artifactId}-</supportBranchPrefix>
                         <versionTagPrefix>version/${project.artifactId}-</versionTagPrefix>
                         <origin>origin</origin>
-                    </gitFlowConfig>            
-                    <allowSnapshots>true</allowSnapshots>
+                    </gitFlowConfig>     
+                    <versionDigitToIncrement>1</versionDigitToIncrement>       
+                    <allowSnapshots>false</allowSnapshots>
                     <keepBranch>true</keepBranch>
                     <noDeploy>true</noDeploy>
                     <suppressFastForward>true</suppressFastForward>
