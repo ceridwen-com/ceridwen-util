@@ -18,7 +18,7 @@
 
   <groupId>com.ceridwen.util</groupId>
   <artifactId>ceridwen-util</artifactId>
-  <version>1.7-SNAPSHOT</version>
+  <version>1.7.0</version>
   <packaging>jar</packaging>
 
     <name>ceridwen-util</name>
