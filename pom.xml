@@ -16,10 +16,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.ceridwen.util</groupId>
-  <artifactId>ceridwen-util</artifactId>
-  <version>1.7.0</version>
-  <packaging>jar</packaging>
+    <groupId>com.ceridwen.util</groupId>
+    <artifactId>ceridwen-util</artifactId>
+    <version>1.7.0</version>
+    <packaging>jar</packaging>
 
     <name>ceridwen-util</name>
     <description>General helper and utility java classes</description>
@@ -30,13 +30,13 @@
         <url>http://www.ceridwen.com</url>
     </organization>
   
-  <licenses>
-    <license>
-      <name>Apache License, Version 2.0</name>
-      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-      <distribution>repo</distribution>
-    </license>
-  </licenses>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
     <issueManagement>
         <system>Redmine</system>
@@ -196,6 +196,18 @@
                     <artifactId>versions-maven-plugin</artifactId>
                     <version>2.7</version>
                 </plugin>
+                <plugin>
+                    <groupId>org.owasp</groupId>
+                    <artifactId>dependency-check-maven</artifactId>
+                    <version>5.0.0-M3</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>                
             </plugins>
         </pluginManagement>
         <plugins>
