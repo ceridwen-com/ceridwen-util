@@ -21,7 +21,7 @@
     <version>1.8.0-maven-central-prep-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>ceridwen-util</name>
+    <name>${project.groupId}:${project.artifactId}</name>
     <description>General helper and utility java classes</description>
     <inceptionYear>2004</inceptionYear>
     <url>https://software.ceridwen.com/redmine/projects/ceridwen-util</url>
@@ -37,6 +37,15 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
+    
+    <developers>
+        <developer>
+            <name>Matthew J. Dovey</name>
+            <email>development@ceridwen.com</email>
+            <organization>Ceridwen Limited</organization>
+            <organizationUrl>http://www.ceridwen.com</organizationUrl>
+        </developer>
+    </developers>    
 
     <issueManagement>
         <system>Redmine</system>
@@ -45,7 +54,8 @@
 
     <scm>
         <url>https://software.ceridwen.com/redmine/projects/ceridwen-util/repository</url>
-        <connection>scm:git:https://software.ceridwen.com/redmine/ceridwen-util.git</connection>
+        <connection>scm:git:https://github.com/ceridwen-com/ceridwen-util.git</connection>
+        <developerConnection>scm:git:https://software.ceridwen.com/redmine/ceridwen-util.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
@@ -54,19 +64,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.build.timestamp.format>EEE, d MMMM, yyyy - HH:mm:ss zzz</maven.build.timestamp.format>
     </properties>
-
-    <repositories>
-        <repository>
-            <id>ceridwen-libs-release</id>
-            <name>Ceridwen Release Repository</name>
-            <url>https://software.ceridwen.com/artifactory/libs-release-local</url>
-        </repository>
-        <repository>
-            <id>ceridwen-libs-snapshot</id>
-            <name>Ceridwen Snapshot Repository</name>
-            <url>https://software.ceridwen.com/artifactory/libs-snapshot-local</url>
-        </repository>
-    </repositories>
 
     <dependencies>
         <dependency>
@@ -199,7 +196,7 @@
                 <plugin>
                     <groupId>org.owasp</groupId>
                     <artifactId>dependency-check-maven</artifactId>
-                    <version>5.0.0-M3</version>
+                    <version>5.0.0</version>
                     <executions>
                         <execution>
                             <goals>
