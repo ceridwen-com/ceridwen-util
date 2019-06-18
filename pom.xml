@@ -1,27 +1,28 @@
+
 <!--
-  Copyright 2016 Matthew J. Dovey (www.ceridwen.com)
-  
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
-  
-    http://www.apache.org/licenses/LICENSE-2.0
-  
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
+Copyright 2019 Ceridwen Limited.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.ceridwen.util</groupId>
     <artifactId>ceridwen-util</artifactId>
-    <version>1.7.0</version>
+    <version>1.7.1</version>
     <packaging>jar</packaging>
 
-    <name>ceridwen-util</name>
+    <name>${project.groupId}:${project.artifactId}</name>
     <description>General helper and utility java classes</description>
     <inceptionYear>2004</inceptionYear>
     <url>https://software.ceridwen.com/redmine/projects/ceridwen-util</url>
@@ -37,6 +38,15 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
+    
+    <developers>
+        <developer>
+            <name>Matthew J. Dovey</name>
+            <email>development@ceridwen.com</email>
+            <organization>Ceridwen Limited</organization>
+            <organizationUrl>http://www.ceridwen.com</organizationUrl>
+        </developer>
+    </developers>    
 
     <issueManagement>
         <system>Redmine</system>
@@ -45,7 +55,8 @@
 
     <scm>
         <url>https://software.ceridwen.com/redmine/projects/ceridwen-util/repository</url>
-        <connection>scm:git:https://software.ceridwen.com/redmine/ceridwen-util.git</connection>
+        <connection>scm:git:https://github.com/ceridwen-com/ceridwen-util.git</connection>
+        <developerConnection>scm:git:https://software.ceridwen.com/redmine/ceridwen-util.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
@@ -53,20 +64,8 @@
         <project.scm.id>git</project.scm.id>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.build.timestamp.format>EEE, d MMMM, yyyy - HH:mm:ss zzz</maven.build.timestamp.format>
+        <netbeans.hint.license>apache20</netbeans.hint.license>
     </properties>
-
-    <repositories>
-        <repository>
-            <id>ceridwen-libs-release</id>
-            <name>Ceridwen Release Repository</name>
-            <url>https://software.ceridwen.com/artifactory/libs-release-local</url>
-        </repository>
-        <repository>
-            <id>ceridwen-libs-snapshot</id>
-            <name>Ceridwen Snapshot Repository</name>
-            <url>https://software.ceridwen.com/artifactory/libs-snapshot-local</url>
-        </repository>
-    </repositories>
 
     <dependencies>
         <dependency>
@@ -103,6 +102,15 @@
     </prerequisites> 
   
     <build>
+        <resources>
+            <resource>
+                <directory></directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>*.md</include>
+                </includes>
+            </resource>
+        </resources>
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -165,11 +173,18 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
                     <version>3.1.0</version>
+                    <configuration>
+                        <failOnError>false</failOnError>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
                     <version>3.1.0</version>
+                    <configuration>
+                        <includePom>true</includePom>
+                    </configuration> 
+                       
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -199,7 +214,7 @@
                 <plugin>
                     <groupId>org.owasp</groupId>
                     <artifactId>dependency-check-maven</artifactId>
-                    <version>5.0.0-M3</version>
+                    <version>5.0.0</version>
                     <executions>
                         <execution>
                             <goals>
@@ -227,8 +242,9 @@
                         <supportBranchPrefix>support//${project.artifactId}-</supportBranchPrefix>
                         <versionTagPrefix>version/${project.artifactId}-</versionTagPrefix>
                         <origin>origin</origin>
-                    </gitFlowConfig>            
-                    <allowSnapshots>true</allowSnapshots>
+                    </gitFlowConfig>     
+                    <versionDigitToIncrement>1</versionDigitToIncrement>       
+                    <allowSnapshots>false</allowSnapshots>
                     <keepBranch>true</keepBranch>
                     <noDeploy>true</noDeploy>
                     <suppressFastForward>true</suppressFastForward>
