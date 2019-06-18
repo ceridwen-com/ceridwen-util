@@ -1,4 +1,4 @@
-**Version 1.7.1: 17/06/2019**
+**Version 1.7.1: 18/06/2019**
 pom.xml fixes
 Moved CHANGLOG and LICENSE to md rather than txt
 Dependencies: apache commons-lang3 3.9
