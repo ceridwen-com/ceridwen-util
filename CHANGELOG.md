@@ -1,6 +1,7 @@
 **Version 1.7.1: 18/06/2019**
 pom.xml fixes
 Moved CHANGLOG and LICENSE to md rather than txt
+Updated license headers to Copyright 2019
 Dependencies: apache commons-lang3 3.9
               apache commons-logging 1.2
               apache commons-net 3.6
