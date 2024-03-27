@@ -25,7 +25,7 @@ limitations under the License.
     <name>${project.groupId}:${project.artifactId}</name>
     <description>General helper and utility java classes</description>
     <inceptionYear>2004</inceptionYear>
-    <url>https://software.ceridwen.com/redmine/projects/ceridwen-util</url>
+    <url>https://github.com/ceridwen-com/ceridwen-util</url>
     <organization>
         <name>Ceridwen Limited</name>
         <url>http://www.ceridwen.com</url>
@@ -49,14 +49,14 @@ limitations under the License.
     </developers>    
 
     <issueManagement>
-        <system>Redmine</system>
-        <url>https://software.ceridwen.com/redmine/projects/ceridwen-util/issues</url>
+        <system>Github</system>
+        <url>https://github.com/ceridwen-com/ceridwen-util/issues</url>
     </issueManagement>
 
     <scm>
-        <url>https://software.ceridwen.com/redmine/projects/ceridwen-util/repository</url>
+        <url>https://github.com/ceridwen-com/ceridwen-util</url>
         <connection>scm:git:https://github.com/ceridwen-com/ceridwen-util.git</connection>
-        <developerConnection>scm:git:https://software.ceridwen.com/redmine/ceridwen-util.git</developerConnection>
+        <developerConnection>scm:git:https://gitlab.ceridwen.com/ceridwen-com/ceridwen-util.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
