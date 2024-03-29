@@ -234,6 +234,13 @@ limitations under the License.
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
                 <version>3.4.1</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.sonatype.ossindex.maven</groupId>
+                        <artifactId>ossindex-maven-enforcer-rules</artifactId>
+                        <version>3.2.0</version>
+                    </dependency>
+                </dependencies>	                
                 <executions>
                     <execution>
                         <id>enforce</id>
@@ -242,14 +249,17 @@ limitations under the License.
                         </goals>
                         <configuration>
                             <rules>
-                                <dependencyConvergence/>
+        			<dependencyConvergence/>
+				<banVulnerable implementation="org.sonatype.ossindex.maven.enforcer.BanVulnerableDependencies"/>
+                                <requirePluginVersions/>
+                                <requireUpperBoundDeps/>
                                 <requireMavenVersion>
                                     <version>${maven.version}</version>
                                 </requireMavenVersion>
                                 <requireJavaVersion>
                                     <version>${java.version}</version>
                                 </requireJavaVersion>
-                                </rules>
+                            </rules>
                         </configuration>
                     </execution>
                 </executions>
