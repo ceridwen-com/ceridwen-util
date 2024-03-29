@@ -67,12 +67,6 @@ public class Spooler<E extends Serializable> extends TimerTask implements Queue<
     }
 
     @Override
-    protected void finalize() throws java.lang.Throwable {
-        this.cancelScheduler();
-        super.finalize();
-    }
-
-    @Override
     public void add(E o) throws IOException {
         this.queue.add(o);
     }
