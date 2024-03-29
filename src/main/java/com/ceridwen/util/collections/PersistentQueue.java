@@ -158,14 +158,11 @@ public class PersistentQueue<E extends Serializable> implements Queue<E> {
 
     public static void main(String[] args) {
         try {
-	        PersistentQueue<String> q = new PersistentQueue<String>(new File("c:/temp/queue"));
-	        new Spooler<String>(q, new SpoolerProcessor<String>() {
-	            @Override
-	            public boolean process(String o) {
-	                System.out.println("Item: " + o);
-	                return true;
-	            }
-	        }, 10000, 10000);
+	        PersistentQueue<String> q = new PersistentQueue<>(new File("c:/temp/queue"));
+                Spooler<String> spooler = new Spooler<>(q, (String o) -> {
+                    System.out.println("Item: " + o);
+                    return true;
+                }, 10000, 10000);
 
 	        q.add("20");
 	        q.add("19");
@@ -189,12 +186,14 @@ public class PersistentQueue<E extends Serializable> implements Queue<E> {
 	        q.add("1");
 
 	        int size = -1;
-	        while (true) {
+	        while (size != 0) {
 	            if (q.size() != size) {
 	                System.out.println("Size: " + q.size());
 	                size = q.size();
 	            }
 	        }
+
+                spooler.cancelScheduler();
         } catch (Exception ex) {
         	ex.printStackTrace();
         }

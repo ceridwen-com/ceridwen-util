@@ -93,7 +93,7 @@ public class Syslog {
         socket = new DatagramSocket();
 
         pricode = Syslog.MakePriorityCode(Syslog.facility, priority);
-        Integer priObj = new Integer(pricode);
+        Integer priObj = pricode;
 
         length = 4 + ident.length() + msg.length() + 1;
         length += (pricode > 99) ? 3 : ((pricode > 9) ? 2 : 1);
@@ -103,7 +103,7 @@ public class Syslog {
         idx = 0;
         data[idx++] = (byte) '<';
 
-        strObj = Integer.toString(priObj.intValue());
+        strObj = Integer.toString(priObj);
         Syslog.getBytes(strObj, 0, strObj.length(), data, idx);
         idx += strObj.length();
 
