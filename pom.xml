@@ -19,7 +19,7 @@ limitations under the License.
 
     <groupId>com.ceridwen.util</groupId>
     <artifactId>ceridwen-util</artifactId>
-    <version>1.7.2</version>
+    <version>1.8.0</version>
     <packaging>jar</packaging>
 
     <name>${project.groupId}:${project.artifactId}</name>
@@ -61,15 +61,13 @@ limitations under the License.
     </scm>
 
     <properties>  
+        <java.version>9</java.version>
+        <maven.version>3.9</maven.version>
         <project.scm.id>git</project.scm.id>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.build.timestamp.format>EEE, d MMMM, yyyy - HH:mm:ss zzz</maven.build.timestamp.format>
         <netbeans.hint.license>apache20</netbeans.hint.license>
     </properties>
-
-    <prerequisites>
-        <maven>3.9</maven>
-    </prerequisites> 
 
     <dependencies>
         <dependency>
@@ -99,6 +97,12 @@ limitations under the License.
             <version>2.4.0-b180830.0359</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>net.java.dev.jna</groupId>
+            <artifactId>jna-platform</artifactId>
+            <version>5.14.0</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
   
     <build>
@@ -123,8 +127,8 @@ limitations under the License.
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.13.0</version>
                     <configuration>
-                        <source>9</source>
-                        <target>9</target>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -226,6 +230,30 @@ limitations under the License.
             </plugins>
         </pluginManagement>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>3.4.1</version>
+                <executions>
+                    <execution>
+                        <id>enforce</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <dependencyConvergence/>
+                                <requireMavenVersion>
+                                    <version>${maven.version}</version>
+                                </requireMavenVersion>
+                                <requireJavaVersion>
+                                    <version>${java.version}</version>
+                                </requireJavaVersion>
+                                </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>		
             <plugin>
                 <groupId>com.amashchenko.maven.plugin</groupId>
                 <artifactId>gitflow-maven-plugin</artifactId>
