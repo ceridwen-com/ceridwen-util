@@ -105,12 +105,15 @@ public class WinEventLogHandler extends AbstractLogHandler {
 	 * @return
 	 */
 	private HANDLE registerEventSource(String server, String source) {
-		HANDLE h = Advapi32.INSTANCE.RegisterEventSource(server, source);
-		if (h == null) {
-			throw new Win32Exception(Kernel32.INSTANCE.GetLastError());
-		}
-
-		return h;
+            Advapi32 i = Advapi32.INSTANCE;
+            if (i == null) {
+		throw new Win32Exception(0);                
+            }
+	    HANDLE h = i.RegisterEventSource(server, source);
+	    if (h == null) {
+		throw new Win32Exception(Kernel32.INSTANCE.GetLastError());
+	    }
+	    return h;
 	}
 
 	/**
@@ -146,16 +149,19 @@ public class WinEventLogHandler extends AbstractLogHandler {
 
     @Override
     protected void sendMessage(String logger, String level, String message) {
-        if (_handle == null) {
-            registerEventSource();
-        }
+        Advapi32 i = Advapi32.INSTANCE;        
 
-        final int messageID = logger.hashCode();
-
-        String[] buffer = { message };
-
-        if (Advapi32.INSTANCE.ReportEvent(_handle, getEventLogType(level),
-            getEventLogCategory(level), messageID, null, buffer.length, 0, buffer, null) == false) {
+        if (i != null) {
+            if (_handle == null) {
+                registerEventSource();
+            }
+            if (_handle != null) {
+                final int messageID = logger.hashCode();
+                String[] buffer = { message };
+                if (i.ReportEvent(_handle, getEventLogType(level),
+                    getEventLogCategory(level), messageID, null, buffer.length, 0, buffer, null) == false) {
+                }
+            }
         }
     }
 
