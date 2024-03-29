@@ -18,6 +18,7 @@ package com.ceridwen.util.logging;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -53,7 +54,6 @@ public class RESTLogHandler extends AbstractLogHandler {
             if (!first) {
                 restString.append("&");
             }
-            first = false;
             restString.append("message=");
             try {
                 restString.append(java.net.URLEncoder.encode(message, "UTF-8"));
@@ -67,7 +67,7 @@ public class RESTLogHandler extends AbstractLogHandler {
             if  (StringUtils.isNotEmpty(params)) {
                  urlStr += "?" + params;
             }
-            URL url = new URL(urlStr);
+            URL url = URI.create(urlStr).toURL();
             URLConnection conn = url.openConnection();
 
             // Get the response
